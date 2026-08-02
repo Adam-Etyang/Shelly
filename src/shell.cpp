@@ -11,6 +11,7 @@ Shell :: Shell() {
 
 void Shell::run() {
   Parser parser;
+  Process process;
   while(true){
     std::cout << "$ ";
     std::string line;
@@ -24,7 +25,7 @@ void Shell::run() {
     if(it != commands.end()){
         it -> second(args);
     }else{
-        exec(args);
+        process.exec(args);
     }
     if(saved_out != -1){
         dup2(saved_out, STDOUT_FILENO);
