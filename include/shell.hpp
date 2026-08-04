@@ -1,6 +1,11 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
+#include <string>
+#include <functional>
+#include "Parser.hpp"
+#include "Process.hpp"
+
 using CommandFunc = std::function <void(std::vector<std::string>&)>;
 class Shell{
   public:
@@ -8,8 +13,11 @@ class Shell{
     void run();
 
   private:
+    Parser parser;
+    Process process;
     std::unordered_map<std::string, CommandFunc> commands;
     std::vector<std::string> tokenize(std::string_view) const;
+    void register_builtin(const std::string& name, CommandFunc func);
     void cd(std::vector<std::string>& args);
     void echo(std::vector<std::string>& args);
     void type(std::vector<std::string>& args);
