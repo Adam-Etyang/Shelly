@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <filesystem>
 
-static void Builtins::cd(std::vector<std::string>& arr){
+void Builtins::cd(std::vector<std::string>& args){
     std::string newpath; 
     if (args.size() < 2){
         const char* home = std::getenv("HOME");

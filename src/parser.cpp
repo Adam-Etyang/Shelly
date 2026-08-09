@@ -1,8 +1,8 @@
-#include "Parser.hpp"
+#include "parser.hpp"
+#include <cctype>
 
 
-
-std::vector<std::string>Parser::tokenize(std::string_view line){
+std::vector<std::string> Parser::tokenize(std::string_view line){
     bool singlequote = false;
     bool doublequote = false;
     std::string current;

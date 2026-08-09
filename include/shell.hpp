@@ -3,8 +3,8 @@
 #include <vector>
 #include <string>
 #include <functional>
-#include "Parser.hpp"
-#include "Process.hpp"
+#include "parser.hpp"
+#include "process.hpp"
 
 using CommandFunc = std::function <void(std::vector<std::string>&)>;
 class Shell{
@@ -18,11 +18,5 @@ class Shell{
     std::unordered_map<std::string, CommandFunc> commands;
     std::vector<std::string> tokenize(std::string_view) const;
     void register_builtin(const std::string& name, CommandFunc func);
-    void cd(std::vector<std::string>& args);
-    void echo(std::vector<std::string>& args);
-    void type(std::vector<std::string>& args);
-    void pwd(std::vector<std::string>& args);
-    int redirect(std::vector<std::string>& args);
-    bool exec(std::vector<std::string>& args);
 
-}
+};

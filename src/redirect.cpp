@@ -3,9 +3,10 @@
 #include <unistd.h>
 #include <algorithm>
 #include <iostream>
+#include <cstdio>
 
 int Builtins::redirect(std::vector<std::string>& args){
-      auto redirect_it =std::find(args.begin(),args.end(), ">");
+      auto redirect_it = std::find(args.begin(),args.end(), ">");
     if(redirect_it == args.end()){
         redirect_it = std::find(args.begin(), args.end(), "1>");
     }

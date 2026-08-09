@@ -1,11 +1,13 @@
-#include "Shell.hpp"
+#include "shell.hpp"
 #include "builtins.hpp"
+#include <iostream>
+#include <unistd.h>
 
-Shell :: Shell() {
-  commands["cd"] = builtins::cd;
-  commands["echo"] = builtins::echo;
-  commands["pwd"] = builtins::pwd;
-  commands["type"] = builtins::type;
+Shell::Shell() {
+  commands["cd"] = Builtins::cd;
+  commands["echo"] = Builtins::echo;
+  commands["pwd"] = Builtins::pwd;
+  commands["type"] = Builtins::type;
 }
 
 void Shell::run() {
@@ -20,7 +22,7 @@ void Shell::run() {
     if(args.empty()) continue;
     if(args[0] == "exit")break;
     
-    int saved_out = redirect(args); 
+    int saved_out = Builtins::redirect(args); 
 
     auto it = commands.find(args[0]);
     if(it != commands.end()){

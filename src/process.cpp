@@ -3,6 +3,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <cerrno>
+#include <cstdio>
 #include <iostream>
 
 bool Process::exec(std::vector<std::string>& args){

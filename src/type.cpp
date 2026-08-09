@@ -3,14 +3,17 @@
 #include <cstdlib>
 #include <sstream>
 #include <unistd.h>
+#include <algorithm>
 
-static void Builtins::type(std::vector<std::string>& args){
+void Builtins::type(std::vector<std::string>& args){
       if(args.size() < 2){
         std::cout<< "type: missing argument"<< std::endl;
         return;
     }
     std::string arg = args[1];
-    if(commands.find(arg)!=commands.end()){
+    static const std::vector<std::string> builtins = {"cd", "echo", "pwd", "type"};
+    bool is_builtin = std::find(builtins.begin(), builtins.end(), arg) != builtins.end();
+    if(is_builtin){
         std::cout<< arg << " is a shell builtin" << std::endl;
     }else if (arg == "exit"){
         std::cout<< "exit is a shell builtin" << std::endl;
