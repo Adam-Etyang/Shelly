@@ -1,4 +1,4 @@
-CMakeFiles/MyProject.dir/src/main.cpp.o: \
+CMakeFiles/Shell.dir/src/main.cpp.o: \
   /Users/adam/Coding/Trash/shell_cpp/src/main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \

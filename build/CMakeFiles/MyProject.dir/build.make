@@ -86,17 +86,145 @@ CMakeFiles/MyProject.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/main.cpp -o CMakeFiles/MyProject.dir/src/main.cpp.s
 
+CMakeFiles/MyProject.dir/src/shell.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/shell.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp
+CMakeFiles/MyProject.dir/src/shell.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MyProject.dir/src/shell.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/shell.cpp.o -MF CMakeFiles/MyProject.dir/src/shell.cpp.o.d -o CMakeFiles/MyProject.dir/src/shell.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp
+
+CMakeFiles/MyProject.dir/src/shell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/shell.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp > CMakeFiles/MyProject.dir/src/shell.cpp.i
+
+CMakeFiles/MyProject.dir/src/shell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/shell.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp -o CMakeFiles/MyProject.dir/src/shell.cpp.s
+
+CMakeFiles/MyProject.dir/src/parser.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/parser.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp
+CMakeFiles/MyProject.dir/src/parser.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MyProject.dir/src/parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/parser.cpp.o -MF CMakeFiles/MyProject.dir/src/parser.cpp.o.d -o CMakeFiles/MyProject.dir/src/parser.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp
+
+CMakeFiles/MyProject.dir/src/parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp > CMakeFiles/MyProject.dir/src/parser.cpp.i
+
+CMakeFiles/MyProject.dir/src/parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp -o CMakeFiles/MyProject.dir/src/parser.cpp.s
+
+CMakeFiles/MyProject.dir/src/process.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/process.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/process.cpp
+CMakeFiles/MyProject.dir/src/process.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MyProject.dir/src/process.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/process.cpp.o -MF CMakeFiles/MyProject.dir/src/process.cpp.o.d -o CMakeFiles/MyProject.dir/src/process.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/process.cpp
+
+CMakeFiles/MyProject.dir/src/process.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/process.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/process.cpp > CMakeFiles/MyProject.dir/src/process.cpp.i
+
+CMakeFiles/MyProject.dir/src/process.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/process.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/process.cpp -o CMakeFiles/MyProject.dir/src/process.cpp.s
+
+CMakeFiles/MyProject.dir/src/cd.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/cd.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp
+CMakeFiles/MyProject.dir/src/cd.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MyProject.dir/src/cd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/cd.cpp.o -MF CMakeFiles/MyProject.dir/src/cd.cpp.o.d -o CMakeFiles/MyProject.dir/src/cd.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp
+
+CMakeFiles/MyProject.dir/src/cd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/cd.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp > CMakeFiles/MyProject.dir/src/cd.cpp.i
+
+CMakeFiles/MyProject.dir/src/cd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/cd.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp -o CMakeFiles/MyProject.dir/src/cd.cpp.s
+
+CMakeFiles/MyProject.dir/src/echo.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/echo.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp
+CMakeFiles/MyProject.dir/src/echo.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MyProject.dir/src/echo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/echo.cpp.o -MF CMakeFiles/MyProject.dir/src/echo.cpp.o.d -o CMakeFiles/MyProject.dir/src/echo.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp
+
+CMakeFiles/MyProject.dir/src/echo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/echo.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp > CMakeFiles/MyProject.dir/src/echo.cpp.i
+
+CMakeFiles/MyProject.dir/src/echo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/echo.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp -o CMakeFiles/MyProject.dir/src/echo.cpp.s
+
+CMakeFiles/MyProject.dir/src/pwd.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/pwd.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp
+CMakeFiles/MyProject.dir/src/pwd.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MyProject.dir/src/pwd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/pwd.cpp.o -MF CMakeFiles/MyProject.dir/src/pwd.cpp.o.d -o CMakeFiles/MyProject.dir/src/pwd.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp
+
+CMakeFiles/MyProject.dir/src/pwd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/pwd.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp > CMakeFiles/MyProject.dir/src/pwd.cpp.i
+
+CMakeFiles/MyProject.dir/src/pwd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/pwd.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp -o CMakeFiles/MyProject.dir/src/pwd.cpp.s
+
+CMakeFiles/MyProject.dir/src/type.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/type.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/type.cpp
+CMakeFiles/MyProject.dir/src/type.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MyProject.dir/src/type.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/type.cpp.o -MF CMakeFiles/MyProject.dir/src/type.cpp.o.d -o CMakeFiles/MyProject.dir/src/type.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/type.cpp
+
+CMakeFiles/MyProject.dir/src/type.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/type.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/type.cpp > CMakeFiles/MyProject.dir/src/type.cpp.i
+
+CMakeFiles/MyProject.dir/src/type.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/type.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/type.cpp -o CMakeFiles/MyProject.dir/src/type.cpp.s
+
+CMakeFiles/MyProject.dir/src/redirect.cpp.o: CMakeFiles/MyProject.dir/flags.make
+CMakeFiles/MyProject.dir/src/redirect.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp
+CMakeFiles/MyProject.dir/src/redirect.cpp.o: CMakeFiles/MyProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MyProject.dir/src/redirect.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProject.dir/src/redirect.cpp.o -MF CMakeFiles/MyProject.dir/src/redirect.cpp.o.d -o CMakeFiles/MyProject.dir/src/redirect.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp
+
+CMakeFiles/MyProject.dir/src/redirect.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProject.dir/src/redirect.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp > CMakeFiles/MyProject.dir/src/redirect.cpp.i
+
+CMakeFiles/MyProject.dir/src/redirect.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProject.dir/src/redirect.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp -o CMakeFiles/MyProject.dir/src/redirect.cpp.s
+
 # Object files for target MyProject
 MyProject_OBJECTS = \
-"CMakeFiles/MyProject.dir/src/main.cpp.o"
+"CMakeFiles/MyProject.dir/src/main.cpp.o" \
+"CMakeFiles/MyProject.dir/src/shell.cpp.o" \
+"CMakeFiles/MyProject.dir/src/parser.cpp.o" \
+"CMakeFiles/MyProject.dir/src/process.cpp.o" \
+"CMakeFiles/MyProject.dir/src/cd.cpp.o" \
+"CMakeFiles/MyProject.dir/src/echo.cpp.o" \
+"CMakeFiles/MyProject.dir/src/pwd.cpp.o" \
+"CMakeFiles/MyProject.dir/src/type.cpp.o" \
+"CMakeFiles/MyProject.dir/src/redirect.cpp.o"
 
 # External object files for target MyProject
 MyProject_EXTERNAL_OBJECTS =
 
 MyProject: CMakeFiles/MyProject.dir/src/main.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/shell.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/parser.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/process.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/cd.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/echo.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/pwd.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/type.cpp.o
+MyProject: CMakeFiles/MyProject.dir/src/redirect.cpp.o
 MyProject: CMakeFiles/MyProject.dir/build.make
 MyProject: CMakeFiles/MyProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable MyProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable MyProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MyProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

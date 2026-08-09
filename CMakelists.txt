@@ -5,8 +5,16 @@ project(Shell)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(MyProject
+add_executable(Shell
     src/main.cpp
+    src/shell.cpp
+    src/parser.cpp
+    src/process.cpp
+    src/cd.cpp
+    src/echo.cpp
+    src/pwd.cpp
+    src/type.cpp
+    src/redirect.cpp
 )
 
-target_include_directories(MyProject PRIVATE include)
+target_include_directories(Shell PRIVATE include)
