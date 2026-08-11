@@ -14,7 +14,6 @@ add_executable(Shell
     src/echo.cpp
     src/pwd.cpp
     src/type.cpp
-    src/redirect.cpp
 )
 
 target_include_directories(Shell PRIVATE include)

@@ -1,11 +1,14 @@
 #include "shell.hpp"
 #include "builtins.hpp"
 #include <algorithm>
+#include <cstddef>
 #include <cstdlib>
 #include <fcntl.h>
 #include <filesystem>
+#include <iterator>
 #include <optional>
 #include <sstream>
+#include <system_error>
 #include <termios.h>
 #include <unistd.h>
 #include <vector>
@@ -46,14 +49,16 @@ void Shell::run() {
       break;
     }
 
-    int saved_out = redirectout(args);
     int saved_err = redirecterr(args);
+    int saved_out = redirectout(args);
 
     auto it = commands.find(args[0]);
     if (it != commands.end()) {
       it->second(args);
     } else {
+      disableRawmode();
       process.exec(args);
+      enableRawmode();
     }
     if (saved_out != -1) {
       dup2(saved_out, STDOUT_FILENO);
@@ -73,36 +78,75 @@ void Shell::register_builtin(const std::string &name, CommandFunc func) {
 
 void Shell::handleTab(std::string &line, bool doubleTab) {
   std::vector<std::string> matches;
-  for (auto &pair : commands) {
-    if (pair.first.rfind(line, 0) == 0) {
-      matches.push_back(pair.first);
-    }
-  }
-  const char *pathenv = std::getenv("PATH");
-  if (pathenv) {
-    std::string pathdir = pathenv;
-    std::string dir;
-    std::istringstream stream(pathdir);
-    while (std::getline(stream, dir, ':')) {
-      std::error_code ec;
-      std::filesystem::directory_iterator it(dir, ec);
-      if (ec) {
-        continue;
+  size_t lastSpace = line.find_last_of(' ');
+  bool isFirstword = (lastSpace == std::string::npos);
+  std::string currentWord =
+      (lastSpace == std::string::npos) ? line : line.substr(lastSpace + 1);
+
+  // build candidate list
+  if (isFirstword) {
+    for (auto &pair : commands) {
+      if (pair.first.starts_with(currentWord)) {
+        matches.push_back(pair.first);
       }
-      for (const auto &entry : it) {
-        std::string filepath = entry.path();
-        std::string filename = entry.path().filename().string();
-        if (filename.rfind(line, 0) == 0) {
-          if (entry.is_regular_file() && access(filepath.c_str(), X_OK) == 0) {
-            if (std::find(matches.begin(), matches.end(), filename) ==
-                matches.end()) {
-              matches.push_back(filename);
+    }
+
+    // find executables in PATH
+    const char *pathenv = std::getenv("PATH");
+    if (pathenv) {
+      std::string pathdir = pathenv;
+      std::string dir;
+      std::istringstream stream(pathdir);
+      while (std::getline(stream, dir, ':')) {
+        std::error_code ec;
+        std::filesystem::directory_iterator it(dir, ec);
+        if (ec) {
+          continue;
+        }
+
+        for (const auto &entry : it) {
+          std::string filepath = entry.path();
+          std::string filename = entry.path().filename().string();
+          if (filename.rfind(currentWord, 0) == 0) {
+            if (entry.is_regular_file() &&
+                access(filepath.c_str(), X_OK) == 0) {
+              if (std::find(matches.begin(), matches.end(), filename) ==
+                  matches.end()) {
+                matches.push_back(filename);
+              }
             }
           }
         }
       }
     }
+  } else {
+    // gather candidates for file completions
+    // 1. Get dir to search
+    size_t slash_pos = currentWord.find_last_of('/');
+    std::string path = (slash_pos != std::string::npos)
+                           ? currentWord.substr(0, slash_pos + 1)
+                           : ".";
+    std::string prefix = (slash_pos != std::string::npos)
+                             ? currentWord.substr(slash_pos + 1)
+                             : currentWord;
+    std::error_code ec;
+    std::filesystem::directory_iterator it(path, ec);
+    if (ec) {
+      return;
+    }
+    for (const auto &entry : it) {
+      std::string filename = entry.path().filename().string();
+      if (filename.rfind(prefix, 0) == 0) {
+        std::string candidate = (path == ".") ? filename : path + filename;
+        if (std::find(matches.begin(), matches.end(), candidate) ==
+            matches.end()) {
+          matches.push_back(candidate);
+        }
+      }
+    }
   }
+
+  // completion logic
   std::sort(matches.begin(), matches.end());
 
   if (matches.empty()) {
@@ -111,6 +155,7 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
   }
 
   std::string lcp = matches[0];
+
   for (size_t i = 1; i < matches.size(); ++i) {
     size_t j = 0;
     while (j < lcp.size() && j < matches[i].size() && lcp[j] == matches[i][j]) {
@@ -119,15 +164,18 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
     lcp.resize(j);
   }
 
-  if (lcp.size() > line.size()) {
-    std::string cmp = lcp.substr(line.size());
+  if (lcp.size() > currentWord.size()) {
+    std::string cmp = lcp.substr(currentWord.size());
     line += cmp;
     std::cout << cmp << std::flush;
+    return;
   }
 
   if (matches.size() == 1) {
+    std::string cmp = matches[0].substr(currentWord.size());
+    line += cmp;
     line += ' ';
-    std::cout << ' ' << std::flush;
+    std::cout << cmp << ' ' << std::flush;
     return;
   }
 
