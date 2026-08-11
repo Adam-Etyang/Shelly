@@ -4,6 +4,7 @@
 #include <sstream>
 #include <unistd.h>
 #include <algorithm>
+#include <filesystem>
 
 void Builtins::type(std::vector<std::string>& args){
       if(args.size() < 2){
@@ -26,7 +27,8 @@ void Builtins::type(std::vector<std::string>& args){
             bool found = false;
             while(std::getline(stream, dir,':')){
                 std::string filepath = dir + "/" + arg;
-                if(access(filepath.c_str(), X_OK) == 0){
+                if (std::filesystem::is_regular_file(filepath) &&
+                    access(filepath.c_str(), X_OK) == 0) {
                     std::cout << arg << " is " << filepath << std::endl;
                     found = true;
                     break;

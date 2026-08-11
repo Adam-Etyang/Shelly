@@ -20,7 +20,6 @@ private:
   bool prevTab = false;
   std::string lastTabLine;
   std::unordered_map<std::string, CommandFunc> commands;
-  std::vector<std::string> tokenize(std::string_view) const;
   void register_builtin(const std::string &name, CommandFunc func);
   std::optional<std::string>readlineWithTab();
   void handleTab(std::string &line, bool doubleTab = false);
