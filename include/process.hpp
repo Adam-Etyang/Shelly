@@ -1,8 +1,20 @@
 #pragma once
-#include<vector>
-#include<string>
+#include <string>
+#include <sys/types.h>
+#include <vector>
 
-class Process{
-  public:
-   bool exec(std::vector<std::string>& args);
+struct Job {
+  pid_t pid;
+  std::string command;
+  bool done = false;
+};
+
+class Process {
+public:
+  bool exec(std::vector<std::string>& args);
+  void reapJobs();
+  void printJobs();
+
+private:
+  std::vector<Job> jobs_;
 };

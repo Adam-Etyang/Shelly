@@ -21,8 +21,8 @@ private:
   std::string lastTabLine;
   std::unordered_map<std::string, CommandFunc> commands;
   void register_builtin(const std::string &name, CommandFunc func);
-  std::optional<std::string>readlineWithTab();
+  std::optional<std::string> readlineWithTab();
   void handleTab(std::string &line, bool doubleTab = false);
-  int redirectout(std::vector<std::string>& args);
-  int redirecterr(std::vector<std::string>& args);
+  int redirectout(std::vector<std::string> &args);
+  int redirecterr(std::vector<std::string> &args);
 };

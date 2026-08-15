@@ -12,7 +12,7 @@ void Builtins::type(std::vector<std::string>& args){
         return;
     }
     std::string arg = args[1];
-    static const std::vector<std::string> builtins = {"cd", "echo", "pwd", "type"};
+    static const std::vector<std::string> builtins = {"cd", "echo", "pwd", "type", "jobs"};
     bool is_builtin = std::find(builtins.begin(), builtins.end(), arg) != builtins.end();
     if(is_builtin){
         std::cout<< arg << " is a shell builtin" << std::endl;

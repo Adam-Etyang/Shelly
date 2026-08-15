@@ -28,12 +28,14 @@ Shell::Shell() {
   commands["echo"] = Builtins::echo;
   commands["pwd"] = Builtins::pwd;
   commands["type"] = Builtins::type;
+  commands["jobs"] = [this](std::vector<std::string>&) { process.printJobs(); };
 }
 
 void Shell::run() {
   enableRawmode();
   prevTab = false;
   while (true) {
+    process.reapJobs();
     std::cout << "$ " << std::flush;
     auto maybeline = readlineWithTab();
     if (!maybeline.has_value()) {
@@ -53,7 +55,9 @@ void Shell::run() {
     int saved_out = redirectout(args);
 
     auto it = commands.find(args[0]);
+
     if (it != commands.end()) {
+      args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
       it->second(args);
     } else {
       disableRawmode();
