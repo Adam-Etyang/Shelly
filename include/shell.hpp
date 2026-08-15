@@ -25,4 +25,5 @@ private:
   void handleTab(std::string &line, bool doubleTab = false);
   int redirectout(std::vector<std::string> &args);
   int redirecterr(std::vector<std::string> &args);
+  int pipeline(std::vector<std::string> &args);
 };

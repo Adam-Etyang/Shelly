@@ -1,13 +1,19 @@
 #include "shell.hpp"
 #include "builtins.hpp"
 #include <algorithm>
+#include <cerrno>
+#include <cmath>
 #include <cstddef>
+#include <cstdio>
 #include <cstdlib>
 #include <fcntl.h>
 #include <filesystem>
+#include <iostream>
 #include <iterator>
 #include <optional>
 #include <sstream>
+#include <sys/_types/_pid_t.h>
+#include <sys/wait.h>
 #include <system_error>
 #include <termios.h>
 #include <unistd.h>
@@ -28,7 +34,9 @@ Shell::Shell() {
   commands["echo"] = Builtins::echo;
   commands["pwd"] = Builtins::pwd;
   commands["type"] = Builtins::type;
-  commands["jobs"] = [this](std::vector<std::string>&) { process.printJobs(); };
+  commands["jobs"] = [this](std::vector<std::string> &) {
+    process.printJobs();
+  };
 }
 
 void Shell::run() {
@@ -54,15 +62,21 @@ void Shell::run() {
     int saved_err = redirecterr(args);
     int saved_out = redirectout(args);
 
-    auto it = commands.find(args[0]);
-
-    if (it != commands.end()) {
-      args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
-      it->second(args);
-    } else {
+    if (std::find(args.begin(), args.end(), "|") != args.end()) {
       disableRawmode();
-      process.exec(args);
+      pipeline(args);
       enableRawmode();
+    } else {
+      auto it = commands.find(args[0]);
+
+      if (it != commands.end()) {
+        args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
+        it->second(args);
+      } else {
+        disableRawmode();
+        process.exec(args);
+        enableRawmode();
+      }
     }
     if (saved_out != -1) {
       dup2(saved_out, STDOUT_FILENO);
@@ -295,4 +309,89 @@ int Shell::redirecterr(std::vector<std::string> &args) {
     return save_out;
   }
   return -1;
+}
+
+int Shell::pipeline(std::vector<std::string> &args) {
+  std::vector<std::vector<std::string>> cmds;
+  std::vector<std::string> currentcmd;
+  for (const auto &arg : args) {
+    if (arg == "|") {
+      if (!currentcmd.empty()) {
+        cmds.push_back(currentcmd);
+        currentcmd.clear();
+      }
+    } else {
+      currentcmd.push_back(arg);
+    }
+  }
+  if (!currentcmd.empty()) {
+    cmds.push_back(currentcmd);
+  }
+  if (cmds.size() < 2) {
+    return -1;
+  }
+
+  size_t numpipes = cmds.size() - 1;
+  std::vector<int> pipefds(2 * numpipes);
+
+  for (size_t i = 0; i < numpipes; i++) {
+    if (pipe(pipefds.data() + i * 2) == -1) {
+      perror("pipe");
+      return -1;
+    }
+  }
+
+  std::vector<pid_t> pids;
+  pids.reserve(cmds.size());
+
+  for (size_t i = 0; i < cmds.size(); i++) {
+    pid_t pid = fork();
+    if (pid < 0) {
+      perror("fork");
+      return -1;
+    }
+    if (pid == 0) {
+      if (i > 0) {
+        int readfd = pipefds[(i - 1) * 2];
+        dup2(readfd, STDIN_FILENO);
+        close(readfd);
+      }
+
+      if (i < cmds.size() - 1) {
+        int writefd = pipefds[i * 2 + 1];
+        dup2(writefd, STDOUT_FILENO);
+        close(writefd);
+      }
+
+      for (int fd : pipefds) {
+        close(fd);
+      }
+
+      std::vector<char *> argv;
+      for (auto &arg : cmds[i]) {
+        argv.push_back(const_cast<char *>(arg.c_str()));
+      }
+      argv.push_back(nullptr);
+      execvp(argv[0], argv.data());
+
+      if (errno == ENOENT) {
+        std::cerr << argv[0] << ": command not found" << std::endl;
+      } else {
+        perror("execvp");
+      }
+      _exit(EXIT_FAILURE);
+    }
+    pids.push_back(pid);
+  }
+
+  for (int fd : pipefds) {
+    close(fd);
+  }
+
+  for (size_t i = 0; i < pids.size(); i++) {
+    int status;
+    waitpid(pids[i], &status, 0);
+  }
+
+  return 0;
 }
