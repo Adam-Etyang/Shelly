@@ -19,10 +19,16 @@ private:
   Process process;
   bool prevTab = false;
   std::string lastTabLine;
+  std::vector<std::string> history;
+  size_t historyPos = 0;
+  std::string savedLine;
   std::unordered_map<std::string, CommandFunc> commands;
   void register_builtin(const std::string &name, CommandFunc func);
   std::optional<std::string> readlineWithTab();
   void handleTab(std::string &line, bool doubleTab = false);
+  void historyUp(std::string &line);
+  void historyDown(std::string &line);
+  void redrawLine(const std::string &line);
   int redirectout(std::vector<std::string> &args);
   int redirecterr(std::vector<std::string> &args);
   int pipeline(std::vector<std::string> &args);

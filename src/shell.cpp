@@ -37,6 +37,11 @@ Shell::Shell() {
   commands["jobs"] = [this](std::vector<std::string> &) {
     process.printJobs();
   };
+  commands["history"] = [this](std::vector<std::string> &) {
+    for (size_t i = 0; i < history.size(); i++) {
+      std::cout << i + 1 << "  " << history[i] << std::endl;
+    }
+  };
 }
 
 void Shell::run() {
@@ -57,6 +62,10 @@ void Shell::run() {
 
     if (args[0] == "exit") {
       break;
+    }
+
+    if (history.empty() || history.back() != line) {
+      history.push_back(line);
     }
 
     int saved_err = redirecterr(args);
@@ -182,18 +191,18 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
     lcp.resize(j);
   }
 
-  if (lcp.size() > currentWord.size()) {
-    std::string cmp = lcp.substr(currentWord.size());
-    line += cmp;
-    std::cout << cmp << std::flush;
-    return;
-  }
-
   if (matches.size() == 1) {
     std::string cmp = matches[0].substr(currentWord.size());
     line += cmp;
     line += ' ';
     std::cout << cmp << ' ' << std::flush;
+    return;
+  }
+
+  if (lcp.size() > currentWord.size()) {
+    std::string cmp = lcp.substr(currentWord.size());
+    line += cmp;
+    std::cout << cmp << std::flush;
     return;
   }
 
@@ -214,12 +223,24 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
 std::optional<std::string> Shell::readlineWithTab() {
   std::string line;
   char c;
+  historyPos = history.size();
 
   while (read(STDIN_FILENO, &c, 1) == 1) {
     if (c == '\n' || c == '\r') {
       prevTab = false;
       std::cout << std::endl;
       return line;
+    } else if (c == '\x1b') {
+      char seq[2];
+      if (read(STDIN_FILENO, &seq[0], 1) != 1 ||
+          read(STDIN_FILENO, &seq[1], 1) != 1) {
+        continue;
+      }
+      if (seq[0] == '[' && seq[1] == 'A') {
+        historyUp(line);
+      } else if (seq[0] == '[' && seq[1] == 'B') {
+        historyDown(line);
+      }
     } else if (c == '\t') {
       bool doubleTab = prevTab && (line == lastTabLine);
       handleTab(line, doubleTab);
@@ -238,6 +259,35 @@ std::optional<std::string> Shell::readlineWithTab() {
     }
   }
   return std::nullopt;
+}
+
+void Shell::historyUp(std::string &line) {
+  if (history.empty())
+    return;
+  prevTab = false;
+  if (historyPos == history.size()) {
+    savedLine = line;
+    historyPos = history.size() - 1;
+  } else if (historyPos > 0) {
+    historyPos--;
+  } else {
+    return;
+  }
+  line = history[historyPos];
+  redrawLine(line);
+}
+
+void Shell::historyDown(std::string &line) {
+  if (historyPos >= history.size())
+    return;
+  prevTab = false;
+  historyPos++;
+  line = (historyPos == history.size()) ? savedLine : history[historyPos];
+  redrawLine(line);
+}
+
+void Shell::redrawLine(const std::string &line) {
+  std::cout << "\r\x1b[K$ " << line << std::flush;
 }
 
 int Shell::redirectout(std::vector<std::string> &args) {
