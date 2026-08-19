@@ -191,18 +191,18 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
     lcp.resize(j);
   }
 
+  if (lcp.size() > currentWord.size()) {
+    std::string cmp = lcp.substr(currentWord.size());
+    line += cmp;
+    std::cout << cmp << std::flush;
+    return;
+  }
+
   if (matches.size() == 1) {
     std::string cmp = matches[0].substr(currentWord.size());
     line += cmp;
     line += ' ';
     std::cout << cmp << ' ' << std::flush;
-    return;
-  }
-
-  if (lcp.size() > currentWord.size()) {
-    std::string cmp = lcp.substr(currentWord.size());
-    line += cmp;
-    std::cout << cmp << std::flush;
     return;
   }
 

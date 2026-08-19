@@ -1,10 +1,15 @@
 #pragma once
 
-#include<string>
-#include<string_view>
-#include<vector>
+#include <string>
+#include <string_view>
+#include <vector>
 
-class Parser{
-  public:
-    std::vector<std::string> tokenize(std::string_view line);
+struct Token {
+  std::string text;
+  bool quoted;
+};
+
+class Parser {
+public:
+  std::vector<Token> tokenize(std::string_view line);
 };
