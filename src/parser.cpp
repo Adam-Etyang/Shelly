@@ -75,6 +75,21 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
 
       else if (c == '|' || c == '<' || c == '>' || c == '&' || c == ';' ||
                c == '(' || c == ')') {
+
+        if (c == '>' && !tokenQuoted && (current == "1" || current == "2")) {
+          std::string fdTock = current;
+          if (i + 1 < line.size() && line[i + 1] == '>') {
+            ftTok += '>>';
+            i++;
+          }
+
+          else {
+            ftTok += '>';
+          }
+          args.push_back(Token{fdTok, false});
+          continue;
+        }
+
         flush();
 
         if (i + 1 < line.size() && ((c == '>' && line[i + 1] == '>') ||
