@@ -1,11 +1,6 @@
 #include "parser.hpp"
 #include <cctype>
 
-struct Token {
-  std::string text;
-  bool quoted;
-};
-
 std::vector<Token> Parser::tokenize(std::string_view line) {
   bool singleQuote = false;
   bool doubleQuote = false;
@@ -42,7 +37,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
 
       else if (c == '\\' && i + 1 < line.size() &&
                (line[i + 1] == '\\' || line[i + 1] == '"' ||
-                line[i + 1] == '\$')) {
+                line[i + 1] == '$')) {
 
         current += line[i + 1];
         tokenQuote = true;
@@ -74,15 +69,17 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
       else if (c == '|' || c == '<' || c == '>' || c == '&' || c == ';' ||
                c == '(' || c == ')') {
 
-        if (c == '>' && !tokenQuoted && (current == "1" || current == "2")) {
-          std::string fdTock = current;
+        if (c == '>' && !tokenQuote && (current == "1" || current == "2")) {
+          std::string fdTok = current;
+          current.clear();
+          tokenQuote = false;
           if (i + 1 < line.size() && line[i + 1] == '>') {
-            ftTok += '>>';
+            fdTok += ">>";
             i++;
           }
 
           else {
-            ftTok += '>';
+            fdTok += '>';
           }
           args.push_back(Token{fdTok, false});
           continue;
@@ -109,5 +106,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
     }
   }
   flush();
-  return args;
+  tokens = std::move(args);
+  pos = 0;
+  return tokens;
 }

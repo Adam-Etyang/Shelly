@@ -8,12 +8,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Shell
     src/main.cpp
     src/shell.cpp
-    src/parser.cpp
     src/process.cpp
     src/cd.cpp
     src/echo.cpp
     src/pwd.cpp
     src/type.cpp
+    src/Parser/Tokenizer.cpp
+    src/Parser/ParseCommand.cpp
+    src/Parser/Parserhelpers.cpp
+    src/Parser/ParsePipeline.cpp
+    src/Parser/ParseSequence.cpp
+    src/Parser/parseAndOr.cpp
 )
 
 target_include_directories(Shell PRIVATE include)

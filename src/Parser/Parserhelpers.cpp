@@ -1,18 +1,17 @@
 #include "parser.hpp"
-#include <cassert>
 
 // returns the token at current pos
 Token Parser::peek() {
-  assert(pos < tokens.size());
+  if (pos >= tokens.size())
+    throw ParseError("unexpected end of input");
   return tokens[pos];
 }
 
 // returns token that was consumed
 Token Parser::advance() {
-  assert(pos < tokens.size());
-  Token current = tokens[pos];
-  pos++;
-  return current;
+  if (pos >= tokens.size())
+    throw ParseError("unexpected end of input");
+  return tokens[pos++];
 }
 
 /*Returns true if not at end,
@@ -20,7 +19,7 @@ the current token (peek()) is unquoted,
 and its .text equals text.
 */
 bool Parser::Check(const std::string &val) {
-  return pos < tokens.size() && !tokens[pos].quoted && tokens[pos].text == val);
+  return pos < tokens.size() && !tokens[pos].quoted && tokens[pos].text == val;
 }
 
 /*Calls check(text);

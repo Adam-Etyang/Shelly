@@ -56,9 +56,15 @@ void Shell::run() {
     }
     std::string line = maybeline.value();
 
-    auto args = parser.tokenize(line);
-    if (args.empty())
+    auto tokens = parser.tokenize(line);
+    if (tokens.empty())
       continue;
+
+    std::vector<std::string> args;
+    args.reserve(tokens.size());
+    for (const auto &t : tokens) {
+      args.push_back(t.text);
+    }
 
     if (args[0] == "exit") {
       break;
@@ -68,32 +74,39 @@ void Shell::run() {
       history.push_back(line);
     }
 
-    int saved_err = redirecterr(args);
-    int saved_out = redirectout(args);
+    try {
+      int saved_err = redirecterr(args);
+      int saved_out = redirectout(args);
 
-    if (std::find(args.begin(), args.end(), "|") != args.end()) {
-      disableRawmode();
-      pipeline(args);
-      enableRawmode();
-    } else {
-      auto it = commands.find(args[0]);
-
-      if (it != commands.end()) {
-        args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
-        it->second(args);
-      } else {
+      if (std::find(args.begin(), args.end(), "|") != args.end()) {
         disableRawmode();
-        process.exec(args);
+        pipeline(args);
         enableRawmode();
+      } else {
+        auto it = commands.find(args[0]);
+
+        if (it != commands.end()) {
+          args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
+          it->second(args);
+        } else {
+          disableRawmode();
+          process.exec(args);
+          enableRawmode();
+        }
       }
-    }
-    if (saved_out != -1) {
-      dup2(saved_out, STDOUT_FILENO);
-      close(saved_out);
-    }
-    if (saved_err != -1) {
-      dup2(saved_err, STDERR_FILENO);
-      close(saved_err);
+
+      if (saved_out != -1) {
+        dup2(saved_out, STDOUT_FILENO);
+        close(saved_out);
+      }
+      if (saved_err != -1) {
+        dup2(saved_err, STDERR_FILENO);
+        close(saved_err);
+      }
+    } catch (const std::exception &e) {
+      disableRawmode();
+      std::cerr << e.what() << std::endl;
+      enableRawmode();
     }
   }
   disableRawmode();
