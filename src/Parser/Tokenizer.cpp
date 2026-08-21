@@ -18,6 +18,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
 
   for (size_t i = 0; i < line.size(); i++) {
     char c = line[i];
+
     if (singleQuote) {
       if (c == '\'') {
         singleQuote = false;

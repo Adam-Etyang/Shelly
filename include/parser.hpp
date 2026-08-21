@@ -26,7 +26,7 @@ struct Command {
 };
 
 struct Pipeline {
-  std::vector<std::string> commands;
+  std::vector<Command> commands;
 };
 
 enum class LogicalOp { And, Or, Seq, Backgrund };
