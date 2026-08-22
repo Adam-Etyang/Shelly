@@ -3,9 +3,9 @@
 #include <vector>
 class Builtins {
 public:
-  static void cd(std::vector<std::string> &args);
-  static void echo(std::vector<std::string> &args);
-  static void type(std::vector<std::string> &args);
-  static void pwd(std::vector<std::string> &args);
-  static void history(std::vector<std::string> &args);
+  static int cd(std::vector<std::string> &args);
+  static int echo(std::vector<std::string> &args);
+  static int type(std::vector<std::string> &args);
+  static int pwd(std::vector<std::string> &args);
+  static int history(std::vector<std::string> &args);
 };

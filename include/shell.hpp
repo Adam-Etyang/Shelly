@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
-using CommandFunc = std::function<void(std::vector<std::string> &)>;
+using CommandFunc = std::function<int(std::vector<std::string> &)>;
 class Shell {
 public:
   Shell();
@@ -29,7 +29,10 @@ private:
   void historyUp(std::string &line);
   void historyDown(std::string &line);
   void redrawLine(const std::string &line);
-  int redirectout(std::vector<std::string> &args);
-  int redirecterr(std::vector<std::string> &args);
-  int pipeline(std::vector<std::string> &args);
+
+  void execute(const Sequence &seq);
+  int executeAndOr(const AndOr &ao);
+  int executePipeline(const Pipeline &pl);
+  int executeCommand(const Command &cmd, bool inPipeline);
+  pid_t forkAndExec(const Command &cmd, const std::vector<int> &allPipeFds, int pipeIn, int pipeOut);
 };

@@ -2,17 +2,12 @@
 #include "builtins.hpp"
 #include <algorithm>
 #include <cerrno>
-#include <cmath>
-#include <cstddef>
 #include <cstdio>
 #include <cstdlib>
 #include <fcntl.h>
 #include <filesystem>
 #include <iostream>
-#include <iterator>
-#include <optional>
 #include <sstream>
-#include <sys/_types/_pid_t.h>
 #include <sys/wait.h>
 #include <system_error>
 #include <termios.h>
@@ -36,13 +31,267 @@ Shell::Shell() {
   commands["type"] = Builtins::type;
   commands["jobs"] = [this](std::vector<std::string> &) {
     process.printJobs();
+    return 0;
   };
   commands["history"] = [this](std::vector<std::string> &) {
     for (size_t i = 0; i < history.size(); i++) {
       std::cout << i + 1 << "  " << history[i] << std::endl;
     }
+    return 0;
   };
 }
+
+// ─── Redirect helpers ───────────────────────────────────────────────
+
+static bool applyRedirects(const std::vector<Redirect> &redirects,
+                           int &savedIn, int &savedOut, int &savedErr) {
+  savedIn = savedOut = savedErr = -1;
+  for (const auto &r : redirects) {
+    int fd = -1;
+    int target = -1;
+    switch (r.type) {
+    case Redirect::Type::In:
+      fd = open(r.target.c_str(), O_RDONLY);
+      target = STDIN_FILENO;
+      break;
+    case Redirect::Type::Out:
+      fd = open(r.target.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+      target = STDOUT_FILENO;
+      break;
+    case Redirect::Type::Append:
+      fd = open(r.target.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0644);
+      target = STDOUT_FILENO;
+      break;
+    case Redirect::Type::ErrOut:
+      fd = open(r.target.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+      target = STDERR_FILENO;
+      break;
+    case Redirect::Type::ErrAppend:
+      fd = open(r.target.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0644);
+      target = STDERR_FILENO;
+      break;
+    case Redirect::Type::Heredoc: {
+      std::string content, line;
+      while (std::getline(std::cin, line)) {
+        if (line == r.target)
+          break;
+        content += line;
+        content += '\n';
+      }
+      FILE *tmp = tmpfile();
+      if (!tmp)
+        return false;
+      fwrite(content.data(), 1, content.size(), tmp);
+      fflush(tmp);
+      rewind(tmp);
+      fd = dup(fileno(tmp));
+      fclose(tmp);
+      target = STDIN_FILENO;
+      break;
+    }
+    }
+    if (fd < 0)
+      return false;
+    if (target == STDIN_FILENO && savedIn == -1)
+      savedIn = dup(STDIN_FILENO);
+    else if (target == STDOUT_FILENO && savedOut == -1)
+      savedOut = dup(STDOUT_FILENO);
+    else if (target == STDERR_FILENO && savedErr == -1)
+      savedErr = dup(STDERR_FILENO);
+    dup2(fd, target);
+    close(fd);
+  }
+  return true;
+}
+
+static void restoreRedirects(int savedIn, int savedOut, int savedErr) {
+  if (savedIn != -1) {
+    dup2(savedIn, STDIN_FILENO);
+    close(savedIn);
+  }
+  if (savedOut != -1) {
+    dup2(savedOut, STDOUT_FILENO);
+    close(savedOut);
+  }
+  if (savedErr != -1) {
+    dup2(savedErr, STDERR_FILENO);
+    close(savedErr);
+  }
+}
+
+// ─── AST executor ───────────────────────────────────────────────────
+
+static std::string describePipeline(const Pipeline &pl) {
+  std::string out;
+  for (size_t i = 0; i < pl.commands.size(); i++) {
+    if (i)
+      out += " | ";
+    for (size_t j = 0; j < pl.commands[i].arg.size(); j++) {
+      if (j)
+        out += ' ';
+      out += pl.commands[i].arg[j];
+    }
+  }
+  return out;
+}
+
+static std::string describeAndOr(const AndOr &ao) {
+  std::string out = describePipeline(ao.first);
+  for (auto &[op, pl] : ao.rest)
+    out += (op == LogicalOp::And ? " && " : " || ") + describePipeline(pl);
+  return out;
+}
+
+pid_t Shell::forkAndExec(const Command &cmd, const std::vector<int> &allPipeFds,
+                         int pipeIn, int pipeOut) {
+  pid_t pid = fork();
+  if (pid < 0) {
+    perror("fork");
+    return -1;
+  }
+
+  if (pid == 0) {
+    if (pipeIn != -1)
+      dup2(pipeIn, STDIN_FILENO);
+    if (pipeOut != -1)
+      dup2(pipeOut, STDOUT_FILENO);
+
+    for (int fd : allPipeFds)
+      close(fd);
+
+    int si = -1, so = -1, se = -1;
+    if (!applyRedirects(cmd.redirects, si, so, se))
+      _exit(1);
+
+    auto it = commands.find(cmd.arg[0]);
+    if (it != commands.end()) {
+      std::vector<std::string> args = cmd.arg;
+      _exit(it->second(args));
+    }
+
+    std::vector<char *> argv;
+    for (auto &s : cmd.arg)
+      argv.push_back(const_cast<char *>(s.c_str()));
+    argv.push_back(nullptr);
+    execvp(argv[0], argv.data());
+    if (errno == ENOENT)
+      std::cerr << cmd.arg[0] << ": command not found" << std::endl;
+    else
+      perror("execvp");
+    _exit(127);
+  }
+
+  return pid;
+}
+
+int Shell::executeCommand(const Command &cmd, bool inPipeline) {
+  if (cmd.arg.empty())
+    return 0;
+
+  auto it = commands.find(cmd.arg[0]);
+  bool isBuiltin = (it != commands.end());
+
+  if (inPipeline || !isBuiltin) {
+    std::vector<int> empty;
+    pid_t pid = forkAndExec(cmd, empty, -1, -1);
+    if (pid < 0)
+      return 1;
+    int status = 0;
+    waitpid(pid, &status, 0);
+    return WIFEXITED(status) ? WEXITSTATUS(status) : 1;
+  }
+
+  std::vector<std::string> args = cmd.arg;
+
+  if (cmd.redirects.empty()) {
+    return it->second(args);
+  }
+
+  int si = -1, so = -1, se = -1;
+  if (!applyRedirects(cmd.redirects, si, so, se)) {
+    std::cerr << args[0] << ": redirect failed" << std::endl;
+    return 1;
+  }
+  int code = it->second(args);
+  restoreRedirects(si, so, se);
+  return code;
+}
+
+int Shell::executePipeline(const Pipeline &pl) {
+  if (pl.commands.empty())
+    return 0;
+
+  if (pl.commands.size() == 1)
+    return executeCommand(pl.commands[0], false);
+
+  size_t n = pl.commands.size();
+  std::vector<int> pipeFds(2 * (n - 1));
+  for (size_t i = 0; i < n - 1; i++) {
+    if (pipe(pipeFds.data() + i * 2) < 0) {
+      perror("pipe");
+      return 1;
+    }
+  }
+
+  std::vector<pid_t> pids;
+  pids.reserve(n);
+  for (size_t i = 0; i < n; i++) {
+    int pipeIn = (i > 0) ? pipeFds[(i - 1) * 2] : -1;
+    int pipeOut = (i < n - 1) ? pipeFds[i * 2 + 1] : -1;
+    pid_t pid = forkAndExec(pl.commands[i], pipeFds, pipeIn, pipeOut);
+    if (pid < 0) {
+      for (int fd : pipeFds)
+        close(fd);
+      return 1;
+    }
+    pids.push_back(pid);
+  }
+
+  for (int fd : pipeFds)
+    close(fd);
+
+  int status = 0;
+  for (size_t i = 0; i < pids.size(); i++) {
+    int st = 0;
+    waitpid(pids[i], &st, 0);
+    if (i == pids.size() - 1 && WIFEXITED(st))
+      status = WEXITSTATUS(st);
+  }
+  return status;
+}
+
+int Shell::executeAndOr(const AndOr &ao) {
+  int status = executePipeline(ao.first);
+  for (auto &[op, pl] : ao.rest) {
+    if (op == LogicalOp::And && status != 0)
+      continue;
+    if (op == LogicalOp::Or && status == 0)
+      continue;
+    status = executePipeline(pl);
+  }
+  return status;
+}
+
+void Shell::execute(const Sequence &seq) {
+  for (auto &[andOr, op] : seq.items) {
+    if (op == LogicalOp::Background) {
+      pid_t pid = fork();
+      if (pid < 0) {
+        perror("fork");
+        continue;
+      }
+      if (pid == 0) {
+        int s = executeAndOr(andOr);
+        _exit(s);
+      }
+      process.addBackgroundJob(pid, describeAndOr(andOr));
+    } else {
+      executeAndOr(andOr);
+    }
+  }
+}
+
+// ─── Shell loop ─────────────────────────────────────────────────────
 
 void Shell::run() {
   enableRawmode();
@@ -56,53 +305,24 @@ void Shell::run() {
     }
     std::string line = maybeline.value();
 
-    auto tokens = parser.tokenize(line);
-    if (tokens.empty())
-      continue;
-
-    std::vector<std::string> args;
-    args.reserve(tokens.size());
-    for (const auto &t : tokens) {
-      args.push_back(t.text);
-    }
-
-    if (args[0] == "exit") {
-      break;
-    }
-
-    if (history.empty() || history.back() != line) {
-      history.push_back(line);
-    }
-
     try {
-      int saved_err = redirecterr(args);
-      int saved_out = redirectout(args);
+      auto tokens = parser.tokenize(line);
+      if (tokens.empty())
+        continue;
 
-      if (std::find(args.begin(), args.end(), "|") != args.end()) {
-        disableRawmode();
-        pipeline(args);
-        enableRawmode();
-      } else {
-        auto it = commands.find(args[0]);
-
-        if (it != commands.end()) {
-          args.erase(std::remove(args.begin(), args.end(), "&"), args.end());
-          it->second(args);
-        } else {
-          disableRawmode();
-          process.exec(args);
-          enableRawmode();
-        }
+      if (!tokens[0].quoted && tokens[0].text == "exit") {
+        break;
       }
 
-      if (saved_out != -1) {
-        dup2(saved_out, STDOUT_FILENO);
-        close(saved_out);
+      if (history.empty() || history.back() != line) {
+        history.push_back(line);
       }
-      if (saved_err != -1) {
-        dup2(saved_err, STDERR_FILENO);
-        close(saved_err);
-      }
+
+      Sequence seq = parser.ParseSequence();
+
+      disableRawmode();
+      execute(seq);
+      enableRawmode();
     } catch (const std::exception &e) {
       disableRawmode();
       std::cerr << e.what() << std::endl;
@@ -116,6 +336,8 @@ void Shell::register_builtin(const std::string &name, CommandFunc func) {
   commands[name] = func;
 }
 
+// ─── Tab completion ─────────────────────────────────────────────────
+
 void Shell::handleTab(std::string &line, bool doubleTab) {
   std::vector<std::string> matches;
   size_t lastSpace = line.find_last_of(' ');
@@ -123,7 +345,6 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
   std::string currentWord =
       (lastSpace == std::string::npos) ? line : line.substr(lastSpace + 1);
 
-  // build candidate list
   if (isFirstword) {
     for (auto &pair : commands) {
       if (pair.first.starts_with(currentWord)) {
@@ -131,7 +352,6 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
       }
     }
 
-    // find executables in PATH
     const char *pathenv = std::getenv("PATH");
     if (pathenv) {
       std::string pathdir = pathenv;
@@ -160,8 +380,6 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
       }
     }
   } else {
-    // gather candidates for file completions
-    // 1. Get dir to search
     size_t slash_pos = currentWord.find_last_of('/');
     std::string path = (slash_pos != std::string::npos)
                            ? currentWord.substr(0, slash_pos + 1)
@@ -186,7 +404,6 @@ void Shell::handleTab(std::string &line, bool doubleTab) {
     }
   }
 
-  // completion logic
   std::sort(matches.begin(), matches.end());
 
   if (matches.empty()) {
@@ -301,160 +518,4 @@ void Shell::historyDown(std::string &line) {
 
 void Shell::redrawLine(const std::string &line) {
   std::cout << "\r\x1b[K$ " << line << std::flush;
-}
-
-int Shell::redirectout(std::vector<std::string> &args) {
-  auto redirect_it =
-      std::find_if(args.begin(), args.end(),
-                   [](const std::string &s) { return s == ">" || s == ">>"; });
-
-  if (redirect_it == args.end()) {
-    redirect_it =
-        std::find_if(args.begin(), args.end(), [](const std::string &s) {
-          return s == "1>" || s == "1>>";
-        });
-  }
-
-  if (redirect_it == args.end()) {
-    return -1;
-  }
-
-  bool append = (*redirect_it == ">>" || *redirect_it == "1>>");
-
-  std::vector<std::string> cmd_args(args.begin(), redirect_it);
-  std::vector<std::string> out_files(redirect_it + 1, args.end());
-
-  if (!out_files.empty()) {
-    int file_fd =
-        open(out_files[0].c_str(),
-             O_WRONLY | O_CREAT | (append ? O_APPEND : O_TRUNC), 0644);
-
-    if (file_fd < 0) {
-      perror("open");
-      return -1;
-    }
-    int save_out = dup(STDOUT_FILENO);
-    dup2(file_fd, STDOUT_FILENO);
-
-    close(file_fd);
-    args = std::move(cmd_args);
-
-    return save_out;
-  }
-  return -1;
-}
-
-int Shell::redirecterr(std::vector<std::string> &args) {
-  auto redirect_it =
-      std::find_if(args.begin(), args.end(), [](const std::string &s) {
-        return s == "2>" || s == "2>>";
-      });
-  if (redirect_it == args.end()) {
-    return -1;
-  }
-
-  bool append = (*redirect_it == "2>>");
-
-  std::vector<std::string> cmd_args(args.begin(), redirect_it);
-  std::vector<std::string> out_files(redirect_it + 1, args.end());
-  if (!out_files.empty()) {
-    int file_fd =
-        open(out_files[0].c_str(),
-             O_WRONLY | O_CREAT | (append ? O_APPEND : O_TRUNC), 0644);
-    if (file_fd < 0) {
-      perror("open");
-      return -1;
-    }
-    int save_out = dup(STDERR_FILENO);
-    dup2(file_fd, STDERR_FILENO);
-    args = std::move(cmd_args);
-    close(file_fd);
-    return save_out;
-  }
-  return -1;
-}
-
-int Shell::pipeline(std::vector<std::string> &args) {
-  std::vector<std::vector<std::string>> cmds;
-  std::vector<std::string> currentcmd;
-  for (const auto &arg : args) {
-    if (arg == "|") {
-      if (!currentcmd.empty()) {
-        cmds.push_back(currentcmd);
-        currentcmd.clear();
-      }
-    } else {
-      currentcmd.push_back(arg);
-    }
-  }
-  if (!currentcmd.empty()) {
-    cmds.push_back(currentcmd);
-  }
-  if (cmds.size() < 2) {
-    return -1;
-  }
-
-  size_t numpipes = cmds.size() - 1;
-  std::vector<int> pipefds(2 * numpipes);
-
-  for (size_t i = 0; i < numpipes; i++) {
-    if (pipe(pipefds.data() + i * 2) == -1) {
-      perror("pipe");
-      return -1;
-    }
-  }
-
-  std::vector<pid_t> pids;
-  pids.reserve(cmds.size());
-
-  for (size_t i = 0; i < cmds.size(); i++) {
-    pid_t pid = fork();
-    if (pid < 0) {
-      perror("fork");
-      return -1;
-    }
-    if (pid == 0) {
-      if (i > 0) {
-        int readfd = pipefds[(i - 1) * 2];
-        dup2(readfd, STDIN_FILENO);
-        close(readfd);
-      }
-
-      if (i < cmds.size() - 1) {
-        int writefd = pipefds[i * 2 + 1];
-        dup2(writefd, STDOUT_FILENO);
-        close(writefd);
-      }
-
-      for (int fd : pipefds) {
-        close(fd);
-      }
-
-      std::vector<char *> argv;
-      for (auto &arg : cmds[i]) {
-        argv.push_back(const_cast<char *>(arg.c_str()));
-      }
-      argv.push_back(nullptr);
-      execvp(argv[0], argv.data());
-
-      if (errno == ENOENT) {
-        std::cerr << argv[0] << ": command not found" << std::endl;
-      } else {
-        perror("execvp");
-      }
-      _exit(EXIT_FAILURE);
-    }
-    pids.push_back(pid);
-  }
-
-  for (int fd : pipefds) {
-    close(fd);
-  }
-
-  for (size_t i = 0; i < pids.size(); i++) {
-    int status;
-    waitpid(pids[i], &status, 0);
-  }
-
-  return 0;
 }
