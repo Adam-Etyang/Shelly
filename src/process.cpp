@@ -55,6 +55,11 @@ bool Process::exec(std::vector<std::string>& args) {
   return true;
 }
 
+void Process::addBackgroundJob(pid_t pid, const std::string &command) {
+  jobs_.push_back(Job{pid, command, false});
+  std::cout << "[" << jobs_.size() << "] " << pid << std::endl;
+}
+
 void Process::reapJobs() {
   for (size_t i = 0; i < jobs_.size(); ++i) {
     Job& job = jobs_[i];
