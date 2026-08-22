@@ -7,8 +7,8 @@ Pipeline Parser::ParsePipeline() {
   while (Match("|")) {
     if (pos >= tokens.size())
       throw ParseError("expected command after '|'");
+    result.commands.push_back(ParseCommand());
   }
-  result.commands.push_back(ParseCommand());
 
   return result;
 }

@@ -4,13 +4,13 @@
 #include <cstdlib>
 #include <filesystem>
 
-void Builtins::cd(std::vector<std::string>& args){
+int Builtins::cd(std::vector<std::string>& args){
     std::string newpath; 
     if (args.size() < 2){
         const char* home = std::getenv("HOME");
         if(!home){
             std::cout<< "home dir not set" << std::endl;
-            return;
+            return 1;
         }
         newpath = home;
     }else{
@@ -20,7 +20,7 @@ void Builtins::cd(std::vector<std::string>& args){
         const char* home = std::getenv("HOME");
         if(!home){
             std::cout << "Home dir not set"<< std::endl;
-            return;
+            return 1;
         }
         newpath = home + newpath.substr(1);
     }
@@ -29,8 +29,9 @@ void Builtins::cd(std::vector<std::string>& args){
     }
     catch(const std::filesystem::filesystem_error& e){
         std::cout<< "cd: " << newpath << ": No such file or directory" << std::endl;
+        return 1;
     }
-
+    return 0;
 }
 
 
