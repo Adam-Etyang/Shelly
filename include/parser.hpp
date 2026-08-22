@@ -29,7 +29,7 @@ struct Pipeline {
   std::vector<Command> commands;
 };
 
-enum class LogicalOp { And, Or, Seq, Backgrund };
+enum class LogicalOp { And, Or, Seq, Background };
 
 struct AndOr {
   Pipeline first;
