@@ -59,6 +59,7 @@ Command Parser::ParseCommand() {
                          "', got '" + target.text + "'");
 
       redirects.push_back(Redirect{redirectType(current.text), target.text});
+
     } else {
       args.push_back(current.text);
       advance();

@@ -43,8 +43,8 @@ Shell::Shell() {
 
 // ─── Redirect helpers ───────────────────────────────────────────────
 
-static bool applyRedirects(const std::vector<Redirect> &redirects,
-                           int &savedIn, int &savedOut, int &savedErr) {
+static bool applyRedirects(const std::vector<Redirect> &redirects, int &savedIn,
+                           int &savedOut, int &savedErr) {
   savedIn = savedOut = savedErr = -1;
   for (const auto &r : redirects) {
     int fd = -1;
