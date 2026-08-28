@@ -29,6 +29,8 @@ Shell::Shell() {
   commands["echo"] = Builtins::echo;
   commands["pwd"] = Builtins::pwd;
   commands["type"] = Builtins::type;
+  commands["fg"] = Builtins::fg;
+  commands["bg"] = Builtins::bg;
   commands["jobs"] = [this](std::vector<std::string> &) {
     process.printJobs();
     return 0;
