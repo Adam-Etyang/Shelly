@@ -29,8 +29,14 @@ Shell::Shell() {
   commands["echo"] = Builtins::echo;
   commands["pwd"] = Builtins::pwd;
   commands["type"] = Builtins::type;
-  commands["fg"] = Builtins::fg;
-  commands["bg"] = Builtins::bg;
+  commands["fg"] = [this](std::vector<std::string> &args) {
+    std::string spec = args.size() > 1 ? args[1] : "";
+    return process.fg(spec) ? 0 : 1;
+  };
+  commands["bg"] = [this](std::vector<std::string> &args) {
+    std::string spec = args.size() > 1 ? args[1] : "";
+    return process.bg(spec) ? 0 : 1;
+  };
   commands["jobs"] = [this](std::vector<std::string> &) {
     process.printJobs();
     return 0;
