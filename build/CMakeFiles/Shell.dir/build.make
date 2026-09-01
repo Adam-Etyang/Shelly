@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/adam/Coding/Trash/shell_cpp
+CMAKE_SOURCE_DIR = /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/adam/Coding/Trash/shell_cpp/build
+CMAKE_BINARY_DIR = /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Shell.dir/depend.make
@@ -73,158 +73,254 @@ CMakeFiles/Shell.dir/codegen:
 .PHONY : CMakeFiles/Shell.dir/codegen
 
 CMakeFiles/Shell.dir/src/main.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/main.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/main.cpp
+CMakeFiles/Shell.dir/src/main.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/main.cpp
 CMakeFiles/Shell.dir/src/main.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Shell.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/main.cpp.o -MF CMakeFiles/Shell.dir/src/main.cpp.o.d -o CMakeFiles/Shell.dir/src/main.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Shell.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/main.cpp.o -MF CMakeFiles/Shell.dir/src/main.cpp.o.d -o CMakeFiles/Shell.dir/src/main.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/main.cpp
 
 CMakeFiles/Shell.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/main.cpp > CMakeFiles/Shell.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/main.cpp > CMakeFiles/Shell.dir/src/main.cpp.i
 
 CMakeFiles/Shell.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/main.cpp -o CMakeFiles/Shell.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/main.cpp -o CMakeFiles/Shell.dir/src/main.cpp.s
 
 CMakeFiles/Shell.dir/src/shell.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/shell.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp
+CMakeFiles/Shell.dir/src/shell.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/shell.cpp
 CMakeFiles/Shell.dir/src/shell.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Shell.dir/src/shell.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/shell.cpp.o -MF CMakeFiles/Shell.dir/src/shell.cpp.o.d -o CMakeFiles/Shell.dir/src/shell.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Shell.dir/src/shell.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/shell.cpp.o -MF CMakeFiles/Shell.dir/src/shell.cpp.o.d -o CMakeFiles/Shell.dir/src/shell.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/shell.cpp
 
 CMakeFiles/Shell.dir/src/shell.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/shell.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp > CMakeFiles/Shell.dir/src/shell.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/shell.cpp > CMakeFiles/Shell.dir/src/shell.cpp.i
 
 CMakeFiles/Shell.dir/src/shell.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/shell.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/shell.cpp -o CMakeFiles/Shell.dir/src/shell.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/shell.cpp -o CMakeFiles/Shell.dir/src/shell.cpp.s
 
-CMakeFiles/Shell.dir/src/parser.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/parser.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp
-CMakeFiles/Shell.dir/src/parser.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Shell.dir/src/parser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/parser.cpp.o -MF CMakeFiles/Shell.dir/src/parser.cpp.o.d -o CMakeFiles/Shell.dir/src/parser.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp
+CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Jobs.cpp
+CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o -MF CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o.d -o CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Jobs.cpp
 
-CMakeFiles/Shell.dir/src/parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp > CMakeFiles/Shell.dir/src/parser.cpp.i
+CMakeFiles/Shell.dir/src/Process/Jobs.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Process/Jobs.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Jobs.cpp > CMakeFiles/Shell.dir/src/Process/Jobs.cpp.i
 
-CMakeFiles/Shell.dir/src/parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/parser.cpp -o CMakeFiles/Shell.dir/src/parser.cpp.s
+CMakeFiles/Shell.dir/src/Process/Jobs.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Process/Jobs.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Jobs.cpp -o CMakeFiles/Shell.dir/src/Process/Jobs.cpp.s
 
-CMakeFiles/Shell.dir/src/process.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/process.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/process.cpp
-CMakeFiles/Shell.dir/src/process.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Shell.dir/src/process.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/process.cpp.o -MF CMakeFiles/Shell.dir/src/process.cpp.o.d -o CMakeFiles/Shell.dir/src/process.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/process.cpp
+CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Lookup.cpp
+CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o -MF CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o.d -o CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Lookup.cpp
 
-CMakeFiles/Shell.dir/src/process.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/process.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/process.cpp > CMakeFiles/Shell.dir/src/process.cpp.i
+CMakeFiles/Shell.dir/src/Process/Lookup.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Process/Lookup.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Lookup.cpp > CMakeFiles/Shell.dir/src/Process/Lookup.cpp.i
 
-CMakeFiles/Shell.dir/src/process.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/process.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/process.cpp -o CMakeFiles/Shell.dir/src/process.cpp.s
+CMakeFiles/Shell.dir/src/Process/Lookup.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Process/Lookup.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/Lookup.cpp -o CMakeFiles/Shell.dir/src/Process/Lookup.cpp.s
+
+CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/FgBg.cpp
+CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o -MF CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o.d -o CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/FgBg.cpp
+
+CMakeFiles/Shell.dir/src/Process/FgBg.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Process/FgBg.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/FgBg.cpp > CMakeFiles/Shell.dir/src/Process/FgBg.cpp.i
+
+CMakeFiles/Shell.dir/src/Process/FgBg.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Process/FgBg.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Process/FgBg.cpp -o CMakeFiles/Shell.dir/src/Process/FgBg.cpp.s
 
 CMakeFiles/Shell.dir/src/cd.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/cd.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp
+CMakeFiles/Shell.dir/src/cd.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/cd.cpp
 CMakeFiles/Shell.dir/src/cd.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Shell.dir/src/cd.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/cd.cpp.o -MF CMakeFiles/Shell.dir/src/cd.cpp.o.d -o CMakeFiles/Shell.dir/src/cd.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Shell.dir/src/cd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/cd.cpp.o -MF CMakeFiles/Shell.dir/src/cd.cpp.o.d -o CMakeFiles/Shell.dir/src/cd.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/cd.cpp
 
 CMakeFiles/Shell.dir/src/cd.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/cd.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp > CMakeFiles/Shell.dir/src/cd.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/cd.cpp > CMakeFiles/Shell.dir/src/cd.cpp.i
 
 CMakeFiles/Shell.dir/src/cd.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/cd.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/cd.cpp -o CMakeFiles/Shell.dir/src/cd.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/cd.cpp -o CMakeFiles/Shell.dir/src/cd.cpp.s
 
 CMakeFiles/Shell.dir/src/echo.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/echo.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp
+CMakeFiles/Shell.dir/src/echo.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/echo.cpp
 CMakeFiles/Shell.dir/src/echo.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Shell.dir/src/echo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/echo.cpp.o -MF CMakeFiles/Shell.dir/src/echo.cpp.o.d -o CMakeFiles/Shell.dir/src/echo.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Shell.dir/src/echo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/echo.cpp.o -MF CMakeFiles/Shell.dir/src/echo.cpp.o.d -o CMakeFiles/Shell.dir/src/echo.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/echo.cpp
 
 CMakeFiles/Shell.dir/src/echo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/echo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp > CMakeFiles/Shell.dir/src/echo.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/echo.cpp > CMakeFiles/Shell.dir/src/echo.cpp.i
 
 CMakeFiles/Shell.dir/src/echo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/echo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/echo.cpp -o CMakeFiles/Shell.dir/src/echo.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/echo.cpp -o CMakeFiles/Shell.dir/src/echo.cpp.s
 
 CMakeFiles/Shell.dir/src/pwd.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/pwd.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp
+CMakeFiles/Shell.dir/src/pwd.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/pwd.cpp
 CMakeFiles/Shell.dir/src/pwd.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Shell.dir/src/pwd.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/pwd.cpp.o -MF CMakeFiles/Shell.dir/src/pwd.cpp.o.d -o CMakeFiles/Shell.dir/src/pwd.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Shell.dir/src/pwd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/pwd.cpp.o -MF CMakeFiles/Shell.dir/src/pwd.cpp.o.d -o CMakeFiles/Shell.dir/src/pwd.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/pwd.cpp
 
 CMakeFiles/Shell.dir/src/pwd.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/pwd.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp > CMakeFiles/Shell.dir/src/pwd.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/pwd.cpp > CMakeFiles/Shell.dir/src/pwd.cpp.i
 
 CMakeFiles/Shell.dir/src/pwd.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/pwd.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/pwd.cpp -o CMakeFiles/Shell.dir/src/pwd.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/pwd.cpp -o CMakeFiles/Shell.dir/src/pwd.cpp.s
 
 CMakeFiles/Shell.dir/src/type.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/type.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/type.cpp
+CMakeFiles/Shell.dir/src/type.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/type.cpp
 CMakeFiles/Shell.dir/src/type.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Shell.dir/src/type.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/type.cpp.o -MF CMakeFiles/Shell.dir/src/type.cpp.o.d -o CMakeFiles/Shell.dir/src/type.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/type.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Shell.dir/src/type.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/type.cpp.o -MF CMakeFiles/Shell.dir/src/type.cpp.o.d -o CMakeFiles/Shell.dir/src/type.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/type.cpp
 
 CMakeFiles/Shell.dir/src/type.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/type.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/type.cpp > CMakeFiles/Shell.dir/src/type.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/type.cpp > CMakeFiles/Shell.dir/src/type.cpp.i
 
 CMakeFiles/Shell.dir/src/type.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/type.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/type.cpp -o CMakeFiles/Shell.dir/src/type.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/type.cpp -o CMakeFiles/Shell.dir/src/type.cpp.s
 
-CMakeFiles/Shell.dir/src/redirect.cpp.o: CMakeFiles/Shell.dir/flags.make
-CMakeFiles/Shell.dir/src/redirect.cpp.o: /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp
-CMakeFiles/Shell.dir/src/redirect.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Shell.dir/src/redirect.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/redirect.cpp.o -MF CMakeFiles/Shell.dir/src/redirect.cpp.o.d -o CMakeFiles/Shell.dir/src/redirect.cpp.o -c /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp
+CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Tokenizer.cpp
+CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Tokenizer.cpp
 
-CMakeFiles/Shell.dir/src/redirect.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/redirect.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp > CMakeFiles/Shell.dir/src/redirect.cpp.i
+CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Tokenizer.cpp > CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.i
 
-CMakeFiles/Shell.dir/src/redirect.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/redirect.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/shell_cpp/src/redirect.cpp -o CMakeFiles/Shell.dir/src/redirect.cpp.s
+CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Tokenizer.cpp -o CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.s
+
+CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseCommand.cpp
+CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseCommand.cpp
+
+CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseCommand.cpp > CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.i
+
+CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseCommand.cpp -o CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.s
+
+CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Parserhelpers.cpp
+CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Parserhelpers.cpp
+
+CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Parserhelpers.cpp > CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.i
+
+CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/Parserhelpers.cpp -o CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.s
+
+CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParsePipeline.cpp
+CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParsePipeline.cpp
+
+CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParsePipeline.cpp > CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.i
+
+CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParsePipeline.cpp -o CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.s
+
+CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseSequence.cpp
+CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseSequence.cpp
+
+CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseSequence.cpp > CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.i
+
+CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/ParseSequence.cpp -o CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.s
+
+CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o: CMakeFiles/Shell.dir/flags.make
+CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o: /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/parseAndOr.cpp
+CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o: CMakeFiles/Shell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o -MF CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o.d -o CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o -c /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/parseAndOr.cpp
+
+CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/parseAndOr.cpp > CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.i
+
+CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/src/Parser/parseAndOr.cpp -o CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.s
 
 # Object files for target Shell
 Shell_OBJECTS = \
 "CMakeFiles/Shell.dir/src/main.cpp.o" \
 "CMakeFiles/Shell.dir/src/shell.cpp.o" \
-"CMakeFiles/Shell.dir/src/parser.cpp.o" \
-"CMakeFiles/Shell.dir/src/process.cpp.o" \
+"CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o" \
+"CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o" \
+"CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o" \
 "CMakeFiles/Shell.dir/src/cd.cpp.o" \
 "CMakeFiles/Shell.dir/src/echo.cpp.o" \
 "CMakeFiles/Shell.dir/src/pwd.cpp.o" \
 "CMakeFiles/Shell.dir/src/type.cpp.o" \
-"CMakeFiles/Shell.dir/src/redirect.cpp.o"
+"CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o" \
+"CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o" \
+"CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o" \
+"CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o" \
+"CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o" \
+"CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o"
 
 # External object files for target Shell
 Shell_EXTERNAL_OBJECTS =
 
 Shell: CMakeFiles/Shell.dir/src/main.cpp.o
 Shell: CMakeFiles/Shell.dir/src/shell.cpp.o
-Shell: CMakeFiles/Shell.dir/src/parser.cpp.o
-Shell: CMakeFiles/Shell.dir/src/process.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o
 Shell: CMakeFiles/Shell.dir/src/cd.cpp.o
 Shell: CMakeFiles/Shell.dir/src/echo.cpp.o
 Shell: CMakeFiles/Shell.dir/src/pwd.cpp.o
 Shell: CMakeFiles/Shell.dir/src/type.cpp.o
-Shell: CMakeFiles/Shell.dir/src/redirect.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o
+Shell: CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o
 Shell: CMakeFiles/Shell.dir/build.make
 Shell: CMakeFiles/Shell.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Shell"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Shell"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Shell.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -236,6 +332,6 @@ CMakeFiles/Shell.dir/clean:
 .PHONY : CMakeFiles/Shell.dir/clean
 
 CMakeFiles/Shell.dir/depend:
-	cd /Users/adam/Coding/Trash/shell_cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/adam/Coding/Trash/shell_cpp /Users/adam/Coding/Trash/shell_cpp /Users/adam/Coding/Trash/shell_cpp/build /Users/adam/Coding/Trash/shell_cpp/build /Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles/Shell.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles/Shell.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Shell.dir/depend
 

@@ -23,6 +23,8 @@ private:
   size_t historyPos = 0;
   std::string savedLine;
   std::unordered_map<std::string, CommandFunc> commands;
+  pid_t foregroundPgid = -1;
+  bool inBackground = false;
   void register_builtin(const std::string &name, CommandFunc func);
   std::optional<std::string> readlineWithTab();
   void handleTab(std::string &line, bool doubleTab = false);

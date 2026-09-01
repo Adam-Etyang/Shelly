@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(Shell
     src/main.cpp
     src/shell.cpp
-    src/Process/Exec.cpp
     src/Process/Jobs.cpp
     src/Process/Lookup.cpp
     src/Process/FgBg.cpp

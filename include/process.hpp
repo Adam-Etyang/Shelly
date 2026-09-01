@@ -15,7 +15,6 @@ struct Job {
 
 class Process {
 public:
-  bool exec(std::vector<std::string> &args);
   void addBackgroundJob(pid_t pid, const std::string &command);
   void addBackgroundJob(pid_t pid, pid_t pgid, const std::string &command);
   void reapJobs();

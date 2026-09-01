@@ -2,6 +2,7 @@
 #include "builtins.hpp"
 #include <algorithm>
 #include <cerrno>
+#include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <fcntl.h>
@@ -25,6 +26,13 @@ void enableRawmode() {
 void disableRawmode() { tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios); }
 
 Shell::Shell() {
+  // Prevent shell itself from dying on Ctrl-C / Ctrl-\ / Ctrl-Z
+  signal(SIGINT, SIG_IGN);
+  signal(SIGQUIT, SIG_IGN);
+  signal(SIGTSTP, SIG_IGN);
+  signal(SIGTTIN, SIG_IGN);
+  signal(SIGTTOU, SIG_IGN);
+
   commands["cd"] = Builtins::cd;
   commands["echo"] = Builtins::echo;
   commands["pwd"] = Builtins::pwd;
@@ -159,6 +167,15 @@ pid_t Shell::forkAndExec(const Command &cmd, const std::vector<int> &allPipeFds,
   }
 
   if (pid == 0) {
+    // Restore default dispositions so Ctrl-C/Ctrl-Z affect children
+    signal(SIGINT, SIG_DFL);
+    signal(SIGQUIT, SIG_DFL);
+    signal(SIGTSTP, SIG_DFL);
+    signal(SIGTTIN, SIG_DFL);
+    signal(SIGTTOU, SIG_DFL);
+    // Put child in its own process group
+    setpgid(0, 0);
+
     if (pipeIn != -1)
       dup2(pipeIn, STDIN_FILENO);
     if (pipeOut != -1)
@@ -189,6 +206,9 @@ pid_t Shell::forkAndExec(const Command &cmd, const std::vector<int> &allPipeFds,
     _exit(127);
   }
 
+  // Parent: ensure child's process group is set (race-safe; child also does
+  // setpgid)
+  setpgid(pid, pid);
   return pid;
 }
 
@@ -204,8 +224,35 @@ int Shell::executeCommand(const Command &cmd, bool inPipeline) {
     pid_t pid = forkAndExec(cmd, empty, -1, -1);
     if (pid < 0)
       return 1;
+    if (inBackground || !isatty(STDIN_FILENO)) {
+      int status = 0;
+      waitpid(pid, &status, WUNTRACED);
+      if (WIFSTOPPED(status)) {
+        process.addBackgroundJob(pid, pid, describePipeline(Pipeline{{cmd}}));
+        Job *j = process.findBYPID(pid);
+        if (j)
+          j->status = JobStatus::Stopped;
+      }
+      return WIFEXITED(status) ? WEXITSTATUS(status) : 1;
+    }
+    // Foreground: give terminal to child so Ctrl-C/Z go to it, not shell
+    foregroundPgid = pid;
+    tcsetpgrp(STDIN_FILENO, pid);
     int status = 0;
-    waitpid(pid, &status, 0);
+    waitpid(pid, &status, WUNTRACED);
+    tcsetpgrp(STDIN_FILENO, getpgrp());
+    foregroundPgid = -1;
+    if (WIFSTOPPED(status)) {
+      process.addBackgroundJob(pid, pid, describePipeline(Pipeline{{cmd}}));
+      // Update status to Stopped (addBackgroundJob creates Running, fix it)
+      Job *j = process.findBYPID(pid);
+      if (j) {
+        j->status = JobStatus::Stopped;
+        std::cout << "[" << 1 << "] Stopped   "
+                  << describePipeline(Pipeline{{cmd}}) << std::endl;
+      }
+      return 1;
+    }
     return WIFEXITED(status) ? WEXITSTATUS(status) : 1;
   }
 
@@ -252,19 +299,68 @@ int Shell::executePipeline(const Pipeline &pl) {
         close(fd);
       return 1;
     }
+    // Join pipeline to first pid's process group
+    if (i == 0) {
+      setpgid(pid, pid);
+    } else {
+      setpgid(pid, pids[0]);
+    }
     pids.push_back(pid);
   }
 
   for (int fd : pipeFds)
     close(fd);
 
+  if (inBackground || !isatty(STDIN_FILENO)) {
+    int status = 0;
+    for (size_t i = 0; i < pids.size(); i++) {
+      int st = 0;
+      waitpid(pids[i], &st, WUNTRACED);
+      if (i == pids.size() - 1 && WIFEXITED(st))
+        status = WEXITSTATUS(st);
+    }
+    return status;
+  }
+
+  // Foreground pipeline: give terminal to its process group
+  pid_t pgid = pids[0];
+  foregroundPgid = pgid;
+  tcsetpgrp(STDIN_FILENO, pgid);
+
   int status = 0;
+  bool stopped = false;
   for (size_t i = 0; i < pids.size(); i++) {
     int st = 0;
-    waitpid(pids[i], &st, 0);
-    if (i == pids.size() - 1 && WIFEXITED(st))
-      status = WEXITSTATUS(st);
+    waitpid(pids[i], &st, WUNTRACED);
+    if (WIFSTOPPED(st)) {
+      stopped = true;
+    }
+    if (i == pids.size() - 1) {
+      if (WIFEXITED(st))
+        status = WEXITSTATUS(st);
+      else if (WIFSIGNALED(st))
+        status = 128 + WTERMSIG(st);
+      else if (WIFSTOPPED(st))
+        status = 1;
+    }
   }
+
+  tcsetpgrp(STDIN_FILENO, getpgrp());
+  foregroundPgid = -1;
+
+  if (stopped) {
+    // Add pipeline as a stopped job
+    std::string desc = describePipeline(pl);
+    process.addBackgroundJob(pgid, pgid, desc);
+    Job *j = process.findBYPID(pgid);
+    if (!j)
+      j = process.findByPGID(pgid);
+    if (j)
+      j->status = JobStatus::Stopped;
+    std::cout << "[" << 1 << "] Stopped   " << desc << std::endl;
+    return 1;
+  }
+
   return status;
 }
 
@@ -289,6 +385,11 @@ void Shell::execute(const Sequence &seq) {
         continue;
       }
       if (pid == 0) {
+        inBackground = true;
+        // Background job should not have terminal control
+        signal(SIGINT, SIG_IGN);
+        signal(SIGQUIT, SIG_IGN);
+        signal(SIGTSTP, SIG_IGN);
         int s = executeAndOr(andOr);
         _exit(s);
       }
@@ -489,6 +590,20 @@ std::optional<std::string> Shell::readlineWithTab() {
       if (!line.empty()) {
         line.pop_back();
         std::cout << "\b \b" << std::flush;
+      }
+    } else if (c == 0x03) { // Ctrl-C
+      prevTab = false;
+      if (foregroundPgid != -1) {
+        kill(-foregroundPgid, SIGINT);
+      } else {
+        std::cout << "^C" << std::endl;
+        line.clear();
+        std::cout << "$ " << std::flush;
+      }
+    } else if (c == 0x1a) { // Ctrl-Z
+      prevTab = false;
+      if (foregroundPgid != -1) {
+        kill(-foregroundPgid, SIGTSTP);
       }
     } else {
       prevTab = false;

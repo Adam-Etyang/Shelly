@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/adam/Coding/Trash/shell_cpp
+CMAKE_SOURCE_DIR = /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/adam/Coding/Trash/shell_cpp/build
+CMAKE_BINARY_DIR = /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles /Users/adam/Coding/Trash/shell_cpp/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/adam/Coding/Trash/shell_cpp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/adam/Coding/Trash/kinda_serious_stuff/shell_cpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,288 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MyProject
+# Target rules for targets named Shell
 
 # Build rule for target.
-MyProject: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MyProject
-.PHONY : MyProject
+Shell: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Shell
+.PHONY : Shell
 
 # fast build rule for target.
-MyProject/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/build
-.PHONY : MyProject/fast
+Shell/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/build
+.PHONY : Shell/fast
+
+src/Parser/ParseCommand.o: src/Parser/ParseCommand.cpp.o
+.PHONY : src/Parser/ParseCommand.o
+
+# target to build an object file
+src/Parser/ParseCommand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.o
+.PHONY : src/Parser/ParseCommand.cpp.o
+
+src/Parser/ParseCommand.i: src/Parser/ParseCommand.cpp.i
+.PHONY : src/Parser/ParseCommand.i
+
+# target to preprocess a source file
+src/Parser/ParseCommand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.i
+.PHONY : src/Parser/ParseCommand.cpp.i
+
+src/Parser/ParseCommand.s: src/Parser/ParseCommand.cpp.s
+.PHONY : src/Parser/ParseCommand.s
+
+# target to generate assembly for a file
+src/Parser/ParseCommand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseCommand.cpp.s
+.PHONY : src/Parser/ParseCommand.cpp.s
+
+src/Parser/ParsePipeline.o: src/Parser/ParsePipeline.cpp.o
+.PHONY : src/Parser/ParsePipeline.o
+
+# target to build an object file
+src/Parser/ParsePipeline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.o
+.PHONY : src/Parser/ParsePipeline.cpp.o
+
+src/Parser/ParsePipeline.i: src/Parser/ParsePipeline.cpp.i
+.PHONY : src/Parser/ParsePipeline.i
+
+# target to preprocess a source file
+src/Parser/ParsePipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.i
+.PHONY : src/Parser/ParsePipeline.cpp.i
+
+src/Parser/ParsePipeline.s: src/Parser/ParsePipeline.cpp.s
+.PHONY : src/Parser/ParsePipeline.s
+
+# target to generate assembly for a file
+src/Parser/ParsePipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParsePipeline.cpp.s
+.PHONY : src/Parser/ParsePipeline.cpp.s
+
+src/Parser/ParseSequence.o: src/Parser/ParseSequence.cpp.o
+.PHONY : src/Parser/ParseSequence.o
+
+# target to build an object file
+src/Parser/ParseSequence.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.o
+.PHONY : src/Parser/ParseSequence.cpp.o
+
+src/Parser/ParseSequence.i: src/Parser/ParseSequence.cpp.i
+.PHONY : src/Parser/ParseSequence.i
+
+# target to preprocess a source file
+src/Parser/ParseSequence.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.i
+.PHONY : src/Parser/ParseSequence.cpp.i
+
+src/Parser/ParseSequence.s: src/Parser/ParseSequence.cpp.s
+.PHONY : src/Parser/ParseSequence.s
+
+# target to generate assembly for a file
+src/Parser/ParseSequence.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/ParseSequence.cpp.s
+.PHONY : src/Parser/ParseSequence.cpp.s
+
+src/Parser/Parserhelpers.o: src/Parser/Parserhelpers.cpp.o
+.PHONY : src/Parser/Parserhelpers.o
+
+# target to build an object file
+src/Parser/Parserhelpers.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.o
+.PHONY : src/Parser/Parserhelpers.cpp.o
+
+src/Parser/Parserhelpers.i: src/Parser/Parserhelpers.cpp.i
+.PHONY : src/Parser/Parserhelpers.i
+
+# target to preprocess a source file
+src/Parser/Parserhelpers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.i
+.PHONY : src/Parser/Parserhelpers.cpp.i
+
+src/Parser/Parserhelpers.s: src/Parser/Parserhelpers.cpp.s
+.PHONY : src/Parser/Parserhelpers.s
+
+# target to generate assembly for a file
+src/Parser/Parserhelpers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Parserhelpers.cpp.s
+.PHONY : src/Parser/Parserhelpers.cpp.s
+
+src/Parser/Tokenizer.o: src/Parser/Tokenizer.cpp.o
+.PHONY : src/Parser/Tokenizer.o
+
+# target to build an object file
+src/Parser/Tokenizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.o
+.PHONY : src/Parser/Tokenizer.cpp.o
+
+src/Parser/Tokenizer.i: src/Parser/Tokenizer.cpp.i
+.PHONY : src/Parser/Tokenizer.i
+
+# target to preprocess a source file
+src/Parser/Tokenizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.i
+.PHONY : src/Parser/Tokenizer.cpp.i
+
+src/Parser/Tokenizer.s: src/Parser/Tokenizer.cpp.s
+.PHONY : src/Parser/Tokenizer.s
+
+# target to generate assembly for a file
+src/Parser/Tokenizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/Tokenizer.cpp.s
+.PHONY : src/Parser/Tokenizer.cpp.s
+
+src/Parser/parseAndOr.o: src/Parser/parseAndOr.cpp.o
+.PHONY : src/Parser/parseAndOr.o
+
+# target to build an object file
+src/Parser/parseAndOr.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.o
+.PHONY : src/Parser/parseAndOr.cpp.o
+
+src/Parser/parseAndOr.i: src/Parser/parseAndOr.cpp.i
+.PHONY : src/Parser/parseAndOr.i
+
+# target to preprocess a source file
+src/Parser/parseAndOr.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.i
+.PHONY : src/Parser/parseAndOr.cpp.i
+
+src/Parser/parseAndOr.s: src/Parser/parseAndOr.cpp.s
+.PHONY : src/Parser/parseAndOr.s
+
+# target to generate assembly for a file
+src/Parser/parseAndOr.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Parser/parseAndOr.cpp.s
+.PHONY : src/Parser/parseAndOr.cpp.s
+
+src/Process/FgBg.o: src/Process/FgBg.cpp.o
+.PHONY : src/Process/FgBg.o
+
+# target to build an object file
+src/Process/FgBg.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/FgBg.cpp.o
+.PHONY : src/Process/FgBg.cpp.o
+
+src/Process/FgBg.i: src/Process/FgBg.cpp.i
+.PHONY : src/Process/FgBg.i
+
+# target to preprocess a source file
+src/Process/FgBg.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/FgBg.cpp.i
+.PHONY : src/Process/FgBg.cpp.i
+
+src/Process/FgBg.s: src/Process/FgBg.cpp.s
+.PHONY : src/Process/FgBg.s
+
+# target to generate assembly for a file
+src/Process/FgBg.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/FgBg.cpp.s
+.PHONY : src/Process/FgBg.cpp.s
+
+src/Process/Jobs.o: src/Process/Jobs.cpp.o
+.PHONY : src/Process/Jobs.o
+
+# target to build an object file
+src/Process/Jobs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Jobs.cpp.o
+.PHONY : src/Process/Jobs.cpp.o
+
+src/Process/Jobs.i: src/Process/Jobs.cpp.i
+.PHONY : src/Process/Jobs.i
+
+# target to preprocess a source file
+src/Process/Jobs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Jobs.cpp.i
+.PHONY : src/Process/Jobs.cpp.i
+
+src/Process/Jobs.s: src/Process/Jobs.cpp.s
+.PHONY : src/Process/Jobs.s
+
+# target to generate assembly for a file
+src/Process/Jobs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Jobs.cpp.s
+.PHONY : src/Process/Jobs.cpp.s
+
+src/Process/Lookup.o: src/Process/Lookup.cpp.o
+.PHONY : src/Process/Lookup.o
+
+# target to build an object file
+src/Process/Lookup.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Lookup.cpp.o
+.PHONY : src/Process/Lookup.cpp.o
+
+src/Process/Lookup.i: src/Process/Lookup.cpp.i
+.PHONY : src/Process/Lookup.i
+
+# target to preprocess a source file
+src/Process/Lookup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Lookup.cpp.i
+.PHONY : src/Process/Lookup.cpp.i
+
+src/Process/Lookup.s: src/Process/Lookup.cpp.s
+.PHONY : src/Process/Lookup.s
+
+# target to generate assembly for a file
+src/Process/Lookup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/Process/Lookup.cpp.s
+.PHONY : src/Process/Lookup.cpp.s
+
+src/cd.o: src/cd.cpp.o
+.PHONY : src/cd.o
+
+# target to build an object file
+src/cd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/cd.cpp.o
+.PHONY : src/cd.cpp.o
+
+src/cd.i: src/cd.cpp.i
+.PHONY : src/cd.i
+
+# target to preprocess a source file
+src/cd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/cd.cpp.i
+.PHONY : src/cd.cpp.i
+
+src/cd.s: src/cd.cpp.s
+.PHONY : src/cd.s
+
+# target to generate assembly for a file
+src/cd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/cd.cpp.s
+.PHONY : src/cd.cpp.s
+
+src/echo.o: src/echo.cpp.o
+.PHONY : src/echo.o
+
+# target to build an object file
+src/echo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/echo.cpp.o
+.PHONY : src/echo.cpp.o
+
+src/echo.i: src/echo.cpp.i
+.PHONY : src/echo.i
+
+# target to preprocess a source file
+src/echo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/echo.cpp.i
+.PHONY : src/echo.cpp.i
+
+src/echo.s: src/echo.cpp.s
+.PHONY : src/echo.s
+
+# target to generate assembly for a file
+src/echo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/echo.cpp.s
+.PHONY : src/echo.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -142,7 +406,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -150,8 +414,80 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyProject.dir/build.make CMakeFiles/MyProject.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/pwd.o: src/pwd.cpp.o
+.PHONY : src/pwd.o
+
+# target to build an object file
+src/pwd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/pwd.cpp.o
+.PHONY : src/pwd.cpp.o
+
+src/pwd.i: src/pwd.cpp.i
+.PHONY : src/pwd.i
+
+# target to preprocess a source file
+src/pwd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/pwd.cpp.i
+.PHONY : src/pwd.cpp.i
+
+src/pwd.s: src/pwd.cpp.s
+.PHONY : src/pwd.s
+
+# target to generate assembly for a file
+src/pwd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/pwd.cpp.s
+.PHONY : src/pwd.cpp.s
+
+src/shell.o: src/shell.cpp.o
+.PHONY : src/shell.o
+
+# target to build an object file
+src/shell.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/shell.cpp.o
+.PHONY : src/shell.cpp.o
+
+src/shell.i: src/shell.cpp.i
+.PHONY : src/shell.i
+
+# target to preprocess a source file
+src/shell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/shell.cpp.i
+.PHONY : src/shell.cpp.i
+
+src/shell.s: src/shell.cpp.s
+.PHONY : src/shell.s
+
+# target to generate assembly for a file
+src/shell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/shell.cpp.s
+.PHONY : src/shell.cpp.s
+
+src/type.o: src/type.cpp.o
+.PHONY : src/type.o
+
+# target to build an object file
+src/type.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/type.cpp.o
+.PHONY : src/type.cpp.o
+
+src/type.i: src/type.cpp.i
+.PHONY : src/type.i
+
+# target to preprocess a source file
+src/type.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/type.cpp.i
+.PHONY : src/type.cpp.i
+
+src/type.s: src/type.cpp.s
+.PHONY : src/type.s
+
+# target to generate assembly for a file
+src/type.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Shell.dir/build.make CMakeFiles/Shell.dir/src/type.cpp.s
+.PHONY : src/type.cpp.s
 
 # Help Target
 help:
@@ -161,10 +497,52 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MyProject"
+	@echo "... Shell"
+	@echo "... src/Parser/ParseCommand.o"
+	@echo "... src/Parser/ParseCommand.i"
+	@echo "... src/Parser/ParseCommand.s"
+	@echo "... src/Parser/ParsePipeline.o"
+	@echo "... src/Parser/ParsePipeline.i"
+	@echo "... src/Parser/ParsePipeline.s"
+	@echo "... src/Parser/ParseSequence.o"
+	@echo "... src/Parser/ParseSequence.i"
+	@echo "... src/Parser/ParseSequence.s"
+	@echo "... src/Parser/Parserhelpers.o"
+	@echo "... src/Parser/Parserhelpers.i"
+	@echo "... src/Parser/Parserhelpers.s"
+	@echo "... src/Parser/Tokenizer.o"
+	@echo "... src/Parser/Tokenizer.i"
+	@echo "... src/Parser/Tokenizer.s"
+	@echo "... src/Parser/parseAndOr.o"
+	@echo "... src/Parser/parseAndOr.i"
+	@echo "... src/Parser/parseAndOr.s"
+	@echo "... src/Process/FgBg.o"
+	@echo "... src/Process/FgBg.i"
+	@echo "... src/Process/FgBg.s"
+	@echo "... src/Process/Jobs.o"
+	@echo "... src/Process/Jobs.i"
+	@echo "... src/Process/Jobs.s"
+	@echo "... src/Process/Lookup.o"
+	@echo "... src/Process/Lookup.i"
+	@echo "... src/Process/Lookup.s"
+	@echo "... src/cd.o"
+	@echo "... src/cd.i"
+	@echo "... src/cd.s"
+	@echo "... src/echo.o"
+	@echo "... src/echo.i"
+	@echo "... src/echo.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/pwd.o"
+	@echo "... src/pwd.i"
+	@echo "... src/pwd.s"
+	@echo "... src/shell.o"
+	@echo "... src/shell.i"
+	@echo "... src/shell.s"
+	@echo "... src/type.o"
+	@echo "... src/type.i"
+	@echo "... src/type.s"
 .PHONY : help
 
 
