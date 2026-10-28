@@ -2,8 +2,19 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Shell)
 
+include(CTest)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(PARSER_SOURCES
+    src/Parser/Tokenizer.cpp
+    src/Parser/ParseCommand.cpp
+    src/Parser/Parserhelpers.cpp
+    src/Parser/ParsePipeline.cpp
+    src/Parser/ParseSequence.cpp
+    src/Parser/parseAndOr.cpp
+)
 
 add_executable(Shell
     src/main.cpp
@@ -15,12 +26,24 @@ add_executable(Shell
     src/echo.cpp
     src/pwd.cpp
     src/type.cpp
-    src/Parser/Tokenizer.cpp
-    src/Parser/ParseCommand.cpp
-    src/Parser/Parserhelpers.cpp
-    src/Parser/ParsePipeline.cpp
-    src/Parser/ParseSequence.cpp
-    src/Parser/parseAndOr.cpp
+    ${PARSER_SOURCES}
 )
 
 target_include_directories(Shell PRIVATE include)
+
+if(BUILD_TESTING)
+    add_executable(parser_tests
+        tests/parser_tests.cpp
+        ${PARSER_SOURCES}
+    )
+    target_include_directories(parser_tests PRIVATE include)
+    add_test(NAME parser_tests COMMAND parser_tests)
+
+    add_test(
+        NAME shell_integration
+        COMMAND ${CMAKE_COMMAND}
+            "-DSHELL_EXECUTABLE=$<TARGET_FILE:Shell>"
+            "-DTEST_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/shell-integration"
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/shell_integration.cmake"
+    )
+endif()

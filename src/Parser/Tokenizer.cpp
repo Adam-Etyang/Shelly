@@ -5,14 +5,16 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
   bool singleQuote = false;
   bool doubleQuote = false;
   bool tokenQuote = false;
+  bool tokenStarted = false;
   std::string current;
   std::vector<Token> args;
 
   auto flush = [&]() {
-    if (!current.empty()) {
+    if (tokenStarted) {
       args.push_back(Token{current, tokenQuote});
       current.clear();
       tokenQuote = false;
+      tokenStarted = false;
     }
   };
 
@@ -26,6 +28,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
 
       else {
         current += c;
+        tokenStarted = true;
         tokenQuote = true;
       }
 
@@ -41,25 +44,32 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
                 line[i + 1] == '$')) {
 
         current += line[i + 1];
+        tokenStarted = true;
         tokenQuote = true;
         i++;
       }
 
       else {
         current += c;
+        tokenStarted = true;
         tokenQuote = true;
       }
     } else {
       if (c == '\'') {
         singleQuote = true;
+        tokenStarted = true;
+        tokenQuote = true;
       }
 
       else if (c == '"') {
         doubleQuote = true;
+        tokenStarted = true;
+        tokenQuote = true;
       }
 
       else if (c == '\\' && i + 1 < line.size()) {
         current += line[i + 1];
+        tokenStarted = true;
         i++;
       }
 
@@ -74,6 +84,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
           std::string fdTok = current;
           current.clear();
           tokenQuote = false;
+          tokenStarted = false;
           if (i + 1 < line.size() && line[i + 1] == '>') {
             fdTok += ">>";
             i++;
@@ -103,6 +114,7 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
 
       else {
         current += c;
+        tokenStarted = true;
       }
     }
   }
