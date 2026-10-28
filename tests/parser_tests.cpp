@@ -15,28 +15,33 @@ void check(bool condition, const std::string &message) {
   }
 }
 
-void testQuotedTokens() {
+void testQuotedArguments() {
   Parser parser;
-  const auto tokens = parser.tokenize("echo \"two words\" 'single' \"\"");
+  const Sequence sequence = parser.parse("echo \"two words\" 'single' \"\"");
 
-  check(tokens.size() == 4, "quoted input preserves each argument");
-  if (tokens.size() == 4) {
-    check(tokens[0].text == "echo" && !tokens[0].quoted,
-          "plain command name is unquoted");
-    check(tokens[1].text == "two words" && tokens[1].quoted,
-          "double-quoted argument remains one quoted token");
-    check(tokens[2].text == "single" && tokens[2].quoted,
-          "single-quoted argument remains one quoted token");
-    check(tokens[3].text.empty() && tokens[3].quoted,
-          "empty quoted argument is preserved");
+  check(sequence.items.size() == 1, "quoted input parses as one sequence item");
+  if (sequence.items.size() != 1)
+    return;
+
+  const auto &commands = sequence.items[0].first.first.commands;
+  check(commands.size() == 1, "quoted input parses as one command");
+  if (commands.size() != 1)
+    return;
+
+  const auto &args = commands[0].arg;
+  check(args.size() == 4, "quoted input preserves each argument");
+  if (args.size() == 4) {
+    check(args[0] == "echo", "plain command name is preserved");
+    check(args[1] == "two words", "double-quoted argument remains one word");
+    check(args[2] == "single", "single-quoted argument remains one word");
+    check(args[3].empty(), "empty quoted argument is preserved");
   }
 }
 
 void testAndOrPipelineAndSequenceParsing() {
   Parser parser;
-  parser.tokenize(
-      "echo \"hello world\" | cat && false || echo recovered; echo later &");
-  const Sequence sequence = parser.ParseSequence();
+  const Sequence sequence =
+      parser.parse("echo \"hello world\" | cat && false || echo recovered; echo later &");
 
   check(sequence.items.size() == 2, "sequence has two entries");
   if (sequence.items.size() != 2)
@@ -73,8 +78,8 @@ void testAndOrPipelineAndSequenceParsing() {
 
 void testRedirectionParsing() {
   Parser parser;
-  parser.tokenize("cat < input > output >> append 2> errors 2>> more << END");
-  const Sequence sequence = parser.ParseSequence();
+  const Sequence sequence = parser.parse(
+      "cat < input > output >> append 2> errors 2>> more << END");
   check(sequence.items.size() == 1, "redirection line is one sequence entry");
   if (sequence.items.size() != 1)
     return;
@@ -108,8 +113,7 @@ void testRedirectionParsing() {
 
 void testQuotedOperatorsAreArguments() {
   Parser parser;
-  parser.tokenize("echo '|' \"&&\"");
-  const Sequence sequence = parser.ParseSequence();
+  const Sequence sequence = parser.parse("echo '|' \"&&\"");
 
   check(sequence.items.size() == 1, "quoted operators do not split sequences");
   if (sequence.items.size() != 1)
@@ -130,10 +134,9 @@ void testQuotedOperatorsAreArguments() {
 void testIncompleteExpressionsAreRejected() {
   for (const std::string input : {"echo |", "echo &&", "echo ||"}) {
     Parser parser;
-    parser.tokenize(input);
     bool threw = false;
     try {
-      (void)parser.ParseSequence();
+      (void)parser.parse(input);
     } catch (const ParseError &) {
       threw = true;
     }
@@ -141,14 +144,35 @@ void testIncompleteExpressionsAreRejected() {
   }
 }
 
+void testParserCanBeReusedAndRejectsUnconsumedTokens() {
+  Parser parser;
+  const Sequence first = parser.parse("echo first");
+  const Sequence second = parser.parse("echo second");
+
+  check(first.items[0].first.first.commands[0].arg[1] == "first",
+        "first parse returns its command");
+  check(second.items[0].first.first.commands[0].arg[1] == "second",
+        "parser resets its state for the next input");
+  check(parser.parse(" ").items.empty(), "empty input produces an empty sequence");
+
+  bool threw = false;
+  try {
+    (void)parser.parse("echo )");
+  } catch (const ParseError &) {
+    threw = true;
+  }
+  check(threw, "unconsumed syntax is rejected instead of ignored");
+}
+
 } // namespace
 
 int main() {
-  testQuotedTokens();
+  testQuotedArguments();
   testAndOrPipelineAndSequenceParsing();
   testRedirectionParsing();
   testQuotedOperatorsAreArguments();
   testIncompleteExpressionsAreRejected();
+  testParserCanBeReusedAndRejectsUnconsumedTokens();
 
   if (failures != 0) {
     std::cerr << failures << " parser test(s) failed\n";

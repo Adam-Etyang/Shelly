@@ -1,7 +1,7 @@
 #include "parser.hpp"
 #include <cctype>
 
-std::vector<Token> Parser::tokenize(std::string_view line) {
+void Parser::tokenize(std::string_view line) {
   bool singleQuote = false;
   bool doubleQuote = false;
   bool tokenQuote = false;
@@ -121,5 +121,4 @@ std::vector<Token> Parser::tokenize(std::string_view line) {
   flush();
   tokens = std::move(args);
   pos = 0;
-  return tokens;
 }

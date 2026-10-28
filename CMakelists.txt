@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PARSER_SOURCES
+    src/Parser/Parser.cpp
     src/Parser/Tokenizer.cpp
     src/Parser/ParseCommand.cpp
     src/Parser/Parserhelpers.cpp
@@ -16,27 +17,34 @@ set(PARSER_SOURCES
     src/Parser/parseAndOr.cpp
 )
 
-add_executable(Shell
-    src/main.cpp
-    src/shell.cpp
+add_library(shell_parser STATIC ${PARSER_SOURCES})
+target_include_directories(shell_parser PUBLIC include)
+
+add_library(shell_process STATIC
     src/Process/Jobs.cpp
     src/Process/Lookup.cpp
     src/Process/FgBg.cpp
+)
+target_include_directories(shell_process PUBLIC include)
+
+add_library(shell_core STATIC
+    src/shell.cpp
+    src/Shell/Executor.cpp
+    src/Shell/LineEditor.cpp
     src/cd.cpp
     src/echo.cpp
     src/pwd.cpp
     src/type.cpp
-    ${PARSER_SOURCES}
 )
+target_include_directories(shell_core PUBLIC include)
+target_link_libraries(shell_core PUBLIC shell_parser shell_process)
 
-target_include_directories(Shell PRIVATE include)
+add_executable(Shell src/main.cpp)
+target_link_libraries(Shell PRIVATE shell_core)
 
 if(BUILD_TESTING)
-    add_executable(parser_tests
-        tests/parser_tests.cpp
-        ${PARSER_SOURCES}
-    )
-    target_include_directories(parser_tests PRIVATE include)
+    add_executable(parser_tests tests/parser_tests.cpp)
+    target_link_libraries(parser_tests PRIVATE shell_parser)
     add_test(NAME parser_tests COMMAND parser_tests)
 
     add_test(

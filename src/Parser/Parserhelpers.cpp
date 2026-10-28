@@ -1,14 +1,14 @@
 #include "parser.hpp"
 
 // returns the token at current pos
-Token Parser::peek() {
+Parser::Token Parser::peek() {
   if (pos >= tokens.size())
     throw ParseError("unexpected end of input");
   return tokens[pos];
 }
 
 // returns token that was consumed
-Token Parser::advance() {
+Parser::Token Parser::advance() {
   if (pos >= tokens.size())
     throw ParseError("unexpected end of input");
   return tokens[pos++];

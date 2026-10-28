@@ -10,11 +10,6 @@ struct ParseError : std::runtime_error {
   using std::runtime_error::runtime_error;
 };
 
-struct Token {
-  std::string text;
-  bool quoted;
-};
-
 struct Redirect {
   enum class Type { In, Out, Append, ErrOut, ErrAppend, Heredoc } type;
   std::string target;
@@ -41,18 +36,24 @@ struct Sequence {
 };
 
 class Parser {
+  struct Token {
+    std::string text;
+    bool quoted;
+  };
+
   size_t pos = 0;
   std::vector<Token> tokens;
   Token peek();
   Token advance();
   bool Check(const std::string &val);
   bool Match(const std::string &val);
-
-public:
-  std::vector<Token> tokenize(std::string_view line);
+  void tokenize(std::string_view line);
 
   Command ParseCommand();
   Pipeline ParsePipeline();
   AndOr ParseAndOr();
   Sequence ParseSequence();
+
+public:
+  Sequence parse(std::string_view line);
 };
